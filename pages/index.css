@@ -1,0 +1,84 @@
+@import url('../vendor/normalize.css');
+
+@import url('../blocks/body/body.css');
+@import url('../blocks/page/page.css');
+
+
+@import url('../blocks/header/header.css');
+@import url('../blocks/logo/logo.css');
+@import url('../blocks/language-switchers/language-switchers.css');
+@import url('../blocks/language-switcher/language-switcher.css');
+
+@import url('../blocks/about/about.css');
+@import url('../blocks/about/__title/about__title.css');
+@import url('../blocks/about/__subtitle/about__subtitle.CSS');
+@import url('../blocks/about/__main-image/about__main-image.css');
+@import url('../blocks/about/__main-image-caption/about__main-image-caption.css');
+@import url('');
+
+@import url('../blocks/intro/intro.css');
+@import url('../blocks/intro/__container/intro__container.css');
+@import url('../blocks/intro/__text/intro__text.css');
+@import url('../blocks/intro/__heading/intro__heading.css');
+@import url('../blocks/intro/__facts/intro__facts.css');
+
+
+@import url('../blocks/photo-grid/photo-grid.css');
+@import url('../blocks/photo-grid/__pic/photo-grid__pic.css');
+
+@import url('../blocks/places/places.css');
+@import url('../blocks/cards/cards.css');
+@import url('../blocks/cards/__item/cards__item.css');
+@import url('../blocks/cards/__image/cards__image.css');
+@import url('../blocks/cards/__link/cards__link.css');
+@import url('../blocks/cards/__text/cards__text.css');
+@import url('../blocks/cards/__title/cards__title.css');
+@import url('../blocks/cards/__URL/cards__url.css');
+@import url('../blocks/cards/__link-txt/cards__link-txt.css');
+
+@import url('../blocks/cover/cover.css');
+@import url('../blocks/cover/__link/cover__link.css');
+@import url('../blocks/cover/__image/cover__image.css');
+@import url('../blocks/cover/__title/cover__title.css');
+@import url('../blocks/cover/__caption/cover__caption.css');
+
+@import url('../blocks/footer/footer.css');
+@import url('../blocks/footer/__columns/footer__columns.css');
+@import url('../blocks/footer/__column-link/footer__column-link.css');
+@import url('../blocks/footer/__column_links/footer__column_links.css');
+@import url('../blocks/footer/__author/footer__author.css');
+
+
+
+@import url('');
+
+
+/**@media screen and (max-width:1024px) {
+    {
+         
+  }
+  }
+  
+  @media screen and (max-width:768px) {
+      {  
+        
+  }
+  }
+  
+  @media screen and (max-width:320px) {
+      {  
+       
+  } 
+  }
+  **/
+
+
+
+
+
+
+
+
+
+
+

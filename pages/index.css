@@ -9,6 +9,13 @@
 @import url('../blocks/logo/logo.css');
 @import url('../blocks/line/line.css');
 
+@import url('../blocks/profile/profile.css');
+@import url('../blocks/profile/__image/profile__image.css');
+@import url('../blocks/profile/__name/profile__name.css');
+@import url('../blocks/profile/__caption/profile__caption.css');
+@import url('../blocks/profile/__edit/profile__edit.css');
+@import url('../blocks/profile/__add/profile__add.css');
+
 
 
 @import url('../blocks/footer/footer.css');
@@ -16,7 +23,7 @@
 
 
 
-@import url('');
+@import url('../blocks/');
 
 
 

@@ -1,10 +1,19 @@
 .profile {
     display: grid;
     grid-template-areas: 
-    "avatar name edit  add"
-    "avatar caption . add";
+    "avatar name  add"
+    "avatar caption  add";
     margin: auto;
     margin-top: 40px;
     max-width: 68.75%;;
     min-height: 120px;
+    overflow: hidden;
 }
+
+@media screen and (max-width: 767px) {
+    .profile {
+    display: flex;     
+    flex-direction: column;
+    max-width: 88.125%;
+    }
+  }

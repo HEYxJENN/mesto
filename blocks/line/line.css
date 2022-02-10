@@ -1,5 +1,12 @@
 .line {
-width: 100%;
-min-height: 1px;
-margin-top: 41px;
+  opacity: 0.7;
+  border: 1px solid #545454;
+  margin-top: 41px;
 }
+
+@media screen and (max-width: 767px) {
+    .line {
+      max-width: 100%;
+      margin-top: 32px;
+    }
+  }

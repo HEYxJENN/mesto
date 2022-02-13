@@ -26,7 +26,7 @@
         <img class="profile__image" src="./images/kusto.png" alt="фото Жака Ива Кусто">
         <div class="profile__nameblock">
           <h2 class="profile__name">Жак-Ив Кусто Ибн Ахмед Хамид Третий Всея Руси</h2>
-          <img class="profile__edit" src="./images/Edit Button.svg" alt="кнопка редактирования">
+          <img class="profile__edit" src="./images/Edit Button.svg" id="edit" alt="кнопка редактирования">
         </div>
         <h3 class="profile__caption">Исследователь </h3>
         <img class="profile__add" src="./images/Add Button.svg" alt="кнопка добавления">
@@ -92,21 +92,21 @@
 
   </div>
   <div class="popup">
-    <img class="popup__close" src="./images/Close Icon.svg">
+  
     <div class="popup__backimg">
-
+      <img class="popup__close" src="./images/Close Icon.svg"> 
       <h2 class="popup__edit">Редактировать профиль</h2>
       <div class="popup__forms">
-        <h3 class="popup__name">asd</h3>
+        <input type="text" placeholder= "enter name" class="popup__name">
         <hr class="popup__line">
-        <h3 class="popup__about">asd</h3>
+        <input type="text" placeholder= "who is it?"  class="popup__about">
         <hr class="popup__line">
         <img class="popup__save" src="./images/Submit Button.svg">
       </div>
     </div>
 
   </div>
-  <script src="script.js"></script>
+  <script src="./scripts/script.js"></script>
 </body>
 
 </html>

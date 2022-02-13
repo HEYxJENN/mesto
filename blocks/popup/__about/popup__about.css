@@ -1,0 +1,13 @@
+.popup__about {
+  border: 0px;
+  position: relative;
+  margin-top: 30px;
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+
+  color: #000000;
+}

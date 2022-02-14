@@ -8,9 +8,15 @@
   color: #000000;
 
   position: relative;
-  margin-top: 34px;
+  padding-top: 34px;
   margin-left: 36px;
   margin-bottom: 0px;
+}
 
-  
+@media screen and (max-width: 767px) {
+  .popup__edit {
+    font-size: 18px;
+    line-height: 22px;
+    margin-left: 22px;
+  }
 }

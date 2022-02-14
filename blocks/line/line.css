@@ -5,8 +5,8 @@
 }
 
 @media screen and (max-width: 767px) {
-    .line {
-      max-width: 100%;
-      margin-top: 32px;
-    }
+  .line {
+    max-width: 100%;
+    margin-top: 32px;
   }
+}

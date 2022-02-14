@@ -1,3 +1,9 @@
-.element__heart{
-    padding-right: 20px;
+.element__heart {
+  padding-right: 20px;
 }
+
+
+.element__heart:hover {
+  opacity: 0.6;
+  transition: 1s ease-in;
+  }

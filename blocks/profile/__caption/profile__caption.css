@@ -2,7 +2,7 @@
   grid-area: caption;
   color: white;
 
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -17,10 +17,6 @@
   max-width: 336px;
 }
 
-
-
-
-
 @media screen and (max-width: 767px) {
   .profile__caption {
     text-align: center;
@@ -29,5 +25,5 @@
 
     margin-top: 14px;
     max-width: 88.125%;
-}
+  }
 }

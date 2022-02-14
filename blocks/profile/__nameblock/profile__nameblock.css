@@ -1,17 +1,16 @@
 .profile__nameblock {
-    display: flex;
-    align-self: center;
+  display: flex;
+  align-self: center;
 }
 
-
 @media screen and (max-width: 767px) {
-    .profile__nameblock {
-max-width: 88.125%;
-    }
+  .profile__nameblock {
+    max-width: 88.125%;
+  }
 }
 
 @media screen and (max-width: 1024px) {
-    .profile__nameblock {
-max-width: 250px;
-    }
+  .profile__nameblock {
+    max-width: 250px;
+  }
 }

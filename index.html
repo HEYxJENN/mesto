@@ -54,7 +54,8 @@
             <img class="element__image" src="./images/my/photo_2022-02-09_15-59-45.jpg" alt="Бали. Вид с Утеса">
             <div class="element__caption">
               <h2 class="element__name">Индонезия, Бали</h2>
-              <button class="button"><img class="element__heart" src="./images/Vector.svg" alt="лайк.сердечко">            </div>
+              <button class="button"><img class="element__heart" src="./images/Vector.svg" alt="лайк.сердечко"></button>
+            </div>
           </li>
 
           <li class="element">
@@ -62,21 +63,26 @@
               alt="Китай.Великая Китайская стена">
             <div class="element__caption">
               <h2 class="element__name">Китай, Пекин</h2>
-              <button class="button"><img class="element__heart" src="./images/Vector.svg" alt="лайк.сердечко">            </div>
+              <button class="button"><img class="element__heart" src="./images/Vector.svg" alt="лайк.сердечко"></button>
+            </div>
           </li>
 
           <li class="element">
             <img class="element__image" src="./images/my/photo_2022-02-09_16-14-42.jpg" alt="Хорватия">
             <div class="element__caption">
               <h2 class="element__name">Хорватия, Сплит</h2>
-              <button class="button"><img class="element__heart" src="./images/Vector.svg" alt="лайк.сердечко">            </div>
+              <button class="button"><img class="element__heart" src="./images/Vector.svg" alt="лайк.сердечко">
+              </button>
+            </div>
           </li>
 
           <li class="element">
             <img class="element__image" src="./images/my/photo_2022-02-09_16-14-42(2).jpg" alt="Копенгаген.Каналы">
             <div class="element__caption">
               <h2 class="element__name">Дания, Копенгаген</h2>
-              <button class="button"><img class="element__heart" src="./images/Vector.svg" alt="лайк.сердечко">            </div>
+              <button class="button"><img class="element__heart" src="./images/Vector.svg" alt="лайк.сердечко">
+              </button>
+            </div>
           </li>
 
         </ul>
@@ -87,17 +93,20 @@
       <p class="footer__logo"> &copy; 2020 Mesto Russia </p>
     </footer>
   </div>
+
   <div class="popup">
     <div class="popup__content">
       <img class="popup__close" src="./images/CloseIcon.svg" alt="закрыть.крестик">
       <h2 class="popup__edit">Редактировать профиль</h2>
       <form class="popup__forms">
-      <input type="name" name="имя" placeholder="enter name" class="popup__name" id="entername">
-      <input type="name" name="описание" placeholder="who is it?" class="popup__about">
-      <button class="button" type="submit"><img class="popup__save" src="./images/SubmitButton.svg" alt="кнопка сохранить"></button> <!--батон, сабмит? страница перезагружается-->
+        <input type="text" name="имя" placeholder="enter name" class="popup__name" id="entername">
+        <!--не понял должен ли быть тайп="нейм", валидатор ругается на такую формулировку, тайп текст у меня был, name дописал-->
+        <input type="text" name="описание" placeholder="who is it?" class="popup__about">
+        <button class="button" type="submit"><img class="popup__save" src="./images/SubmitButton.svg"
+            alt="кнопка сохранить"></button>
       </form>
-      </div>
     </div>
+  </div>
   </div>
   <script src="./scripts/index.js"></script>
 </body>

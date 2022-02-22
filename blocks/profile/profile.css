@@ -5,7 +5,7 @@
     "avatar caption  add";
   margin: auto;
   margin-top: 40px;
-  max-width: 68.75%;
+  max-width: 880px;
   min-height: 120px;
   grid-auto-columns: 150px auto 150px;
   grid-auto-rows: 60px 60px;

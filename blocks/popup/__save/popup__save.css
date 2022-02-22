@@ -1,14 +1,16 @@
 .popup__save {
   position: relative;
   margin-top: 48px;
+  border-radius: 2px;
+  z-index: 1;
+  margin-bottom: 25px;
 }
 
 @media screen and (max-width: 767px) {
   .popup__save {
-    margin-top: 35px;
+    margin-top: 45px;
     width: 238px;
     height: 46px;
-    margin-left: auto;
     object-fit: cover;
   }
 }

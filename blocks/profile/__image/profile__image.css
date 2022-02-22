@@ -2,7 +2,15 @@
   grid-area: avatar;
   color: white;
   margin: auto;
-  max-width: 168.75px;
-  max-height: 127.5px;
+  max-width: 120px;
+  max-height: 120px;
   border-radius: 100px;
+  margin-left: 0px;
+}
+
+
+@media screen and (max-width: 1023px) {
+  .profile__image {
+   margin-left: auto;
+  }
 }

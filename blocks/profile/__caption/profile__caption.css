@@ -17,13 +17,14 @@
   max-width: 336px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1023px) {
   .profile__caption {
     text-align: center;
-
     align-self: center;
-
-    margin-top: 14px;
     max-width: 88.125%;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 10px;
   }
 }

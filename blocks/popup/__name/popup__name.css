@@ -1,12 +1,22 @@
 .popup__name {
   border: none;
-
-  font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-
   color: #000000;
+  min-width: 358px;
+  min-height: 27px;
+  border-bottom: 1px solid rgba(0,0,0, 0.2);
+  margin-top: 56px;
+  padding: 0px;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__name  {
+    margin-top: 75px;
+    min-width: 238px;
+    min-height: 27px;
+  }
 }
 

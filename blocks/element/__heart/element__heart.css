@@ -1,6 +1,6 @@
 .element__heart {
   padding-right: 20px; /* значение точно соответствует макету! возможно, проблема была в позиционировании надписи или размере сердечка  */
-  align-self:center; 
+  align-self:center;
   min-width: 22px;
   min-height: 19px;
   transition: opacity 1s ease-in;

@@ -1,5 +1,4 @@
 .popup__edit {
-  font-family: Inter;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
@@ -8,7 +7,7 @@
   position: relative;
   margin-left: 36px;
   margin-bottom: 0px;
-  margin-top: 0px;
+  margin-top: 34px;
 }
 
 @media screen and (max-width: 767px) {
@@ -17,6 +16,6 @@
     line-height: 22px;
     margin-left: 22px;
     max-width: 238px;
-    margin-top: 10px;
+    margin-top: 25px;
   }
 }

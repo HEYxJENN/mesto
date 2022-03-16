@@ -32,19 +32,10 @@
 
       <section>
         <ul class="elements">
-
-
-          <li class="element">
-            <img class="element__image" src="./images/my/photo_2022-02-09_16-14-42(2).jpg" alt="Копенгаген.Каналы">
-            <div class="element__caption">
-              <h2 class="element__name">Дания, Копенгаген</h2>
-              <button type="button" class="element__heart">
-              </button>
-            </div>
-          </li>
-
+         
         </ul>
       </section>
+
     </main>
     <!--+++-->
     <footer class="footer">
@@ -75,7 +66,21 @@
         </div>
       </div>
 
+      <template id="template">
+        <li class="element">
+          <div class="element__image-block">
+          <img class="element__image" src=" " alt=" ">
+          <button type="button" class="element__delete"></button>
+          </div>
+          <div class="element__caption">
+            <h2 class="element__name"></h2>
+            <button type="button" class="element__heart">
+            </button>
+          </div>
+        </li>
+      </template>
       <script src="./scripts/index.js"></script>
+
 </body>
 
 </html>

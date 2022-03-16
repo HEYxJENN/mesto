@@ -1,3 +1,4 @@
+/*переменные*/
 const popup = document.querySelector(".popup");
 const openPopupButton = document.querySelector(".profile__edit");
 const closePopupButton = document.querySelector(".popup__close");
@@ -7,12 +8,44 @@ const maybecaption = document.querySelector("#enterabout");
 const namenow = document.querySelector(".profile__name");
 const captionnow = document.querySelector(".profile__caption");
 const form = document.querySelector(".popup__forms");
-
-const add = document.querySelector(".profile__add");
-const popupAdd = document.querySelector("#popup__add");
-const popupEdit = document.querySelector("#popup__edit");
+const trashBin = document.querySelector(".element__delete");
 const listElements = document.querySelector(".elements")
+const itemTemplateContent=document.querySelector("#template").content;
 
+/*открытие + закрытие */
+const openPopupEditButton = document.querySelector(".profile__edit");
+const openPopupAddButton = document.querySelector(".profile__add");
+const popupEdit = document.querySelector("#popup__edit");
+const popupAdd = document.querySelector("#popup__add");
+
+const openpopup = function(element) {
+      element.classList.add("popup_opened");
+}; 
+
+maybename.placeholder = namenow.textContent;
+maybecaption.placeholder = captionnow.textContent;
+
+const closepopup = function () {
+  popup.classList.remove("popup_opened");
+};
+
+
+const closePopupArea = function (event) {
+  if (event.target !== event.currentTarget) {
+    return;
+  }
+  closepopup(event);
+};
+
+openPopupEditButton.addEventListener("click", () => openpopup(popupEdit) );
+openPopupAddButton.addEventListener("click", () => openpopup(popupAdd));
+
+closePopupButton.addEventListener("click",closepopup);
+
+
+popup.addEventListener("click", closePopupArea);
+
+/*добавление кода*/
 const items = [
   {
     name: 'Архыз',
@@ -41,67 +74,22 @@ const items = [
 ];
 
 
-
-function rednderItems(items) {
-  items.forEach((item) => {
-    console.log(item);
-    listElements.insertAdjacentHtml('beforeend',
-    `<li class="element">
-    <img class="element__image" src="${item}" alt="Копенгаген.Каналы">
-    <div class="element__caption">
-      <h2 class="element__name">Дания, Копенгаген</h2>
-      <button type="button" class="element__heart">
-      </button>
-    </div>
-  </li> 
-  `
-    )
-    });
-} 
-rednderItems(items);
-
-/*function rednderItems(initialCards) { 
-  initialCards.forEach((card) => {
-console.log(card)
-listElement.insertAdjacentHtml("beforeend", 
-`
-<li class="element">
-<img class="element__image" src="${initialCards.link}" alt="Грузия. Горы">
-<div class="element__caption">
-<h2 class="element__name">${initialCards.name}</h2>
-<button type="button" class="element__heart">
-</button>
-</div>
-</li>
-`)
-});
+function rednderItem(item) {
+  console.log(item.name);
+    const itemElement= itemTemplateContent.cloneNode(true);
+    itemElement.querySelector(".element__name").textContent = item.name;
+    itemElement.querySelector(".element__image").src= item.link;
+    itemElement.querySelector(".element__image").alt= item.name;
+    setEventListeners(itemElement); 
+    listElements.appendChild(itemElement);
 }
 
-rednderItems(card); */
+function renderItems(items) {
+  items.forEach(rednderItem);
+} 
+renderItems(items);
 
-
-maybename.placeholder = namenow.textContent;
-maybecaption.placeholder = captionnow.textContent;
-
-const openpopupEdit = function (element) {
-element.classList.add("popup_opened");
-};
-
-const openpopupAdd = function () {
-  popupAdd.classList.add("popup_opened");
-  };
-  
-const closepopup = function () {
-  popup.classList.remove("popup_opened");
-};
-
-const closePopupArea = function (event) {
-  if (event.target !== event.currentTarget) {
-    return;
-  }
-  closepopup(event);
-};
-
+/*сохранение*/
 function formSubmitHandler(evt) {
   evt.preventDefault();
   const itsaname = maybename.value;
@@ -112,8 +100,19 @@ function formSubmitHandler(evt) {
 }
 
 form.addEventListener("submit", formSubmitHandler);
-openPopupButton.addEventListener("click", openpopupEdit(popupEdit));
-closePopupButton.addEventListener("click", closepopup);
-popup.addEventListener("click", closePopupArea);
-add.addEventListener("click", openpopupAdd);
- 
+
+/*лайки*/
+
+/*удаление*/
+function setEventListeners(itemElement) {
+  itemElement.querySelector(".element__delete").addEventListener("click", handleDelete)
+}
+
+function handleDelete (event) {
+  const itemElement = event.target.closest(".element");
+  itemElement.remove();
+}
+
+setEventListeners(itemElement); 
+
+

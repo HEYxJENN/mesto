@@ -103,9 +103,16 @@ form.addEventListener("submit", formSubmitHandler);
 
 /*лайки*/
 
+function handleLike (event) {
+  const itemElement = event.target;
+  itemElement.classList.toggle("element__heart_active");
+  itemElement.classList.toggle("element__heart");
+} 
+
 /*удаление*/
 function setEventListeners(itemElement) {
-  itemElement.querySelector(".element__delete").addEventListener("click", handleDelete)
+  itemElement.querySelector(".element__delete").addEventListener("click", handleDelete);
+  itemElement.querySelector(".element__heart").addEventListener("click", handleLike);
 }
 
 function handleDelete (event) {
@@ -113,6 +120,39 @@ function handleDelete (event) {
   itemElement.remove();
 }
 
-setEventListeners(itemElement); 
+/*добавление*/
+/*
+const maybePlaceName = document.querySelector("#enterplacename");
+const maybeLink = document.querySelector("#enterlink");
 
+const renderCard = 
+
+
+function formSubmitHandlerAdd(evt) {
+evt.preventDefault();
+
+!!!
+
+renderItems(items);
+closepopup();
+}
+
+form.addEventListener("submit", formSubmitHandlerAdd);
+*/
+
+/*картинка*/
+const zoomImg = document.querySelector(".popup__zoomimg");
+const captionImg= document.querySelector(".popup__zoomimg_caption");
+const cardImage= document.querySelector(".element__image");
+const zoom = document.querySelector("#zoomImg")
+
+
+function zoomImage(evt) {
+  console.log(evt.target.src);
+  openpopup(zoom);
+  zoomImg.src=evt.target.src;
+  zoomImg.alt=evt.target.alt;
+}
+
+cardImage.addEventListener("click", zoomImage);
 

@@ -12,6 +12,7 @@ const trashBin = document.querySelector(".element__delete");
 const listElements = document.querySelector(".elements")
 const itemTemplateContent=document.querySelector("#template").content;
 
+
 /*открытие + закрытие */
 const openPopupEditButton = document.querySelector(".profile__edit");
 const openPopupAddButton = document.querySelector(".profile__add");
@@ -25,25 +26,31 @@ const openpopup = function(element) {
 maybename.placeholder = namenow.textContent;
 maybecaption.placeholder = captionnow.textContent;
 
-const closepopup = function () {
-  popup.classList.remove("popup_opened");
+const closepopup = function (element) {
+  console.log(event.target); 
+  console.log(event.currentTarget); 
+  element.classList.remove("popup_opened");
 };
 
 
 const closePopupArea = function (event) {
+  console.log(event.target); 
+  console.log(event.currentTarget); 
   if (event.target !== event.currentTarget) {
     return;
   }
-  closepopup(event);
+  closepopup(event.target);
 };
 
 openPopupEditButton.addEventListener("click", () => openpopup(popupEdit) );
-openPopupAddButton.addEventListener("click", () => openpopup(popupAdd));
+openPopupAddButton.addEventListener("click", () => openpopup(popupAdd) );
 
-closePopupButton.addEventListener("click",closepopup);
+closePopupButton.addEventListener("click", () => closepopup(popupEdit) );
+closePopupButton.addEventListener("click", () => closepopup(popupAdd) );
 
+popupAdd.addEventListener("click", closePopupArea);
+popupEdit.addEventListener("click", closePopupArea);
 
-popup.addEventListener("click", closePopupArea);
 
 /*добавление кода*/
 const items = [
@@ -89,7 +96,8 @@ function renderItems(items) {
 } 
 renderItems(items);
 
-/*сохранение*/
+/*сохранение профиль*/
+
 function formSubmitHandler(evt) {
   evt.preventDefault();
   const itsaname = maybename.value;
@@ -122,37 +130,40 @@ function handleDelete (event) {
 
 /*добавление*/
 /*
+const place =  document.querySelector(".element__name");
+const link =  document.querySelector(".element__image");
 const maybePlaceName = document.querySelector("#enterplacename");
 const maybeLink = document.querySelector("#enterlink");
 
-const renderCard = 
 
-
-function formSubmitHandlerAdd(evt) {
-evt.preventDefault();
-
-!!!
-
-renderItems(items);
-closepopup();
+const addPlace = (evt) => {
+  evt.preventDefault();
+  const newCard = {
+          name: maybePlaceName.value,
+          link: maybeLink.value,
+        }
+  const card = rednderItem(newCard);
+  const element = card.generateCard();
+  items.prepend(element);
+  closepopup();
 }
-
-form.addEventListener("submit", formSubmitHandlerAdd);
 */
-
 /*картинка*/
 const zoomImg = document.querySelector(".popup__zoomimg");
 const captionImg= document.querySelector(".popup__zoomimg_caption");
-const cardImage= document.querySelector(".element__image");
-const zoom = document.querySelector("#zoomImg")
+const cardImage= document.querySelectorAll(".element__image");
+const zoom = document.querySelector("#zoomImg");
+
 
 
 function zoomImage(evt) {
   console.log(evt.target.src);
-  openpopup(zoom);
+  console.log(cardImage);
   zoomImg.src=evt.target.src;
   zoomImg.alt=evt.target.alt;
+  openpopup(zoom);
 }
 
-cardImage.addEventListener("click", zoomImage);
+cardImage.forEach(item => item.addEventListener("click",zoomImage));
+zoom.addEventListener("click", closePopupArea);
 

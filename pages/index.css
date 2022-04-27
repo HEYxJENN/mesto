@@ -40,3 +40,6 @@
 @import url("../blocks/content/content.css");
 
 @import url("../blocks/popup/__zoomimg/popup__zoomimg.css");
+@import url("../blocks/popup/__zoomimg-box/popup__zoomimg-box.css");
+@import url("../blocks/popup/__zoomimg/_caption/popup__zoomimg_caption.css");
+

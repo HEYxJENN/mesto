@@ -1,15 +1,16 @@
 /*переменные*/
 const popup = document.querySelector(".popup");
 const openPopupButton = document.querySelector(".profile__edit");
-const closePopupButton = document.querySelector(".popup__close");
+const closePopupButton = document.querySelectorAll(".popup__close");
 const saveButton = document.querySelector(".popup__save");
 const maybename = document.querySelector("#entername");
 const maybecaption = document.querySelector("#enterabout");
 const namenow = document.querySelector(".profile__name");
 const captionnow = document.querySelector(".profile__caption");
 const form = document.querySelector(".popup__forms");
+const formAdd = document.querySelector("#popup__add");
 const trashBin = document.querySelector(".element__delete");
-const listElements = document.querySelector(".elements")
+const listElements = document.querySelector(".elements");
 const itemTemplateContent=document.querySelector("#template").content;
 
 
@@ -21,15 +22,14 @@ const popupAdd = document.querySelector("#popup__add");
 
 const openpopup = function(element) {
       element.classList.add("popup_opened");
+      element.querySelector(".popup__close").addEventListener("click",  () => closepopup(element),{once:true});
 }; 
 
 maybename.placeholder = namenow.textContent;
 maybecaption.placeholder = captionnow.textContent;
 
-const closepopup = function (element) {
-  console.log(event.target); 
-  console.log(event.currentTarget); 
-  element.classList.remove("popup_opened");
+const closepopup = function (x) {
+  x.classList.remove("popup_opened");
 };
 
 
@@ -42,11 +42,12 @@ const closePopupArea = function (event) {
   closepopup(event.target);
 };
 
-openPopupEditButton.addEventListener("click", () => openpopup(popupEdit) );
+openPopupEditButton.addEventListener("click", () => openpopup(popupEdit ) );
 openPopupAddButton.addEventListener("click", () => openpopup(popupAdd) );
 
-closePopupButton.addEventListener("click", () => closepopup(popupEdit) );
-closePopupButton.addEventListener("click", () => closepopup(popupAdd) );
+
+closePopupButton.forEach(item => item.addEventListener("click", closepopup));
+
 
 popupAdd.addEventListener("click", closePopupArea);
 popupEdit.addEventListener("click", closePopupArea);
@@ -79,6 +80,7 @@ const items = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+items.reverse();
 
 
 function rednderItem(item) {
@@ -88,13 +90,14 @@ function rednderItem(item) {
     itemElement.querySelector(".element__image").src= item.link;
     itemElement.querySelector(".element__image").alt= item.name;
     setEventListeners(itemElement); 
-    listElements.appendChild(itemElement);
+    listElements.prepend(itemElement);
 }
 
 function renderItems(items) {
   items.forEach(rednderItem);
 } 
 renderItems(items);
+
 
 /*сохранение профиль*/
 
@@ -104,7 +107,7 @@ function formSubmitHandler(evt) {
   const itsacaption = maybecaption.value;
   namenow.textContent = itsaname;
   captionnow.textContent = itsacaption;
-  closepopup();
+  closepopup(popupEdit  );
 }
 
 form.addEventListener("submit", formSubmitHandler);
@@ -129,41 +132,38 @@ function handleDelete (event) {
 }
 
 /*добавление*/
-/*
-const place =  document.querySelector(".element__name");
-const link =  document.querySelector(".element__image");
+
 const maybePlaceName = document.querySelector("#enterplacename");
 const maybeLink = document.querySelector("#enterlink");
 
 
 const addPlace = (evt) => {
   evt.preventDefault();
-  const newCard = {
+rednderItem({
           name: maybePlaceName.value,
           link: maybeLink.value,
-        }
-  const card = rednderItem(newCard);
-  const element = card.generateCard();
-  items.prepend(element);
-  closepopup();
+        });
+  closepopup(popupAdd);
 }
-*/
-/*картинка*/
+
+formAdd.addEventListener("submit", addPlace);
+
+
+/*картинка zoom*/
 const zoomImg = document.querySelector(".popup__zoomimg");
 const captionImg= document.querySelector(".popup__zoomimg_caption");
 const cardImage= document.querySelectorAll(".element__image");
 const zoom = document.querySelector("#zoomImg");
-
-
 
 function zoomImage(evt) {
   console.log(evt.target.src);
   console.log(cardImage);
   zoomImg.src=evt.target.src;
   zoomImg.alt=evt.target.alt;
+  captionImg.textContent=evt.target.alt;
   openpopup(zoom);
 }
-
+  
 cardImage.forEach(item => item.addEventListener("click",zoomImage));
 zoom.addEventListener("click", closePopupArea);
 

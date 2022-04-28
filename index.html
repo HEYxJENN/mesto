@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -32,81 +33,63 @@
 
       <section>
         <ul class="elements">
-          <li class="element">
-            <img class="element__image" src="./images/my/photo_2022-02-09_16-14-44.jpg" alt="Грузия. Горы">
-            <div class="element__caption">
-              <h2 class="element__name">Грузия, Местия</h2>
-              <button type="button" class="element__heart">
-              </button>
-            </div>
-          </li>
-
-          <li class="element">
-            <img class="element__image" src="./images/my/photo_2022-02-09_15-46-07.jpg" alt="Домбай. Лошади в поле">
-            <div class="element__caption">
-              <h2 class="element__name">Россия, Домбай</h2>
-              <button type="button" class="element__heart">
-              </button>
-            </div>
-          </li>
-
-          <li class="element">
-            <img class="element__image" src="./images/my/photo_2022-02-09_15-59-45.jpg" alt="Бали. Вид с Утеса">
-            <div class="element__caption">
-              <h2 class="element__name">Индонезия, Бали</h2>
-              <button type="button" class="element__heart">
-              </button>
-            </div>
-          </li>
-
-          <li class="element">
-            <img class="element__image" src="./images/my/photo_2022-02-09_16-14-43.jpg"
-              alt="Китай.Великая Китайская стена">
-            <div class="element__caption">
-              <h2 class="element__name">Китай, Пекин</h2>
-              <button type="button" class="element__heart">
-              </button>
-            </div>
-          </li>
-
-          <li class="element">
-            <img class="element__image" src="./images/my/photo_2022-02-09_16-14-42.jpg" alt="Хорватия">
-            <div class="element__caption">
-              <h2 class="element__name">Хорватия, Сплит</h2>
-              <button type="button" class="element__heart">
-              </button>
-            </div>
-          </li>
-
-          <li class="element">
-            <img class="element__image" src="./images/my/photo_2022-02-09_16-14-42(2).jpg" alt="Копенгаген.Каналы">
-            <div class="element__caption">
-              <h2 class="element__name">Дания, Копенгаген</h2>
-              <button type="button" class="element__heart">
-              </button>
-            </div>
-          </li>
-
+         
         </ul>
       </section>
+
     </main>
     <!--+++-->
     <footer class="footer">
       <p class="footer__logo"> &copy; 2020 Mesto Russia </p>
     </footer>
-    <div class="popup">
+
+    <div class="popup" id="popup__edit">
       <div class="popup__content">
         <button type="button" class="popup__close"></button>
         <h2 class="popup__edit">Редактировать профиль</h2>
         <form class="popup__forms" name="form-edit">
           <input type="text" name="field-name" placeholder="enter name" class="popup__input" id="entername">
           <input type="text" name="field-about" placeholder="who is it?" class="popup__input" id="enterabout">
-          <button class="popup__save" type="submit">Сохранить</button>
+          <button class="popup__save" type="submit" id="submit__edit">Сохранить</button>
         </form>
       </div>
-    </div>
-  </div>
-  <script src="./scripts/index.js"></script>
+    </div>  
+
+      <div class="popup" id="popup__add">
+        <div class="popup__content">
+          <button type="button" class="popup__close"></button>
+          <h2 class="popup__edit">Новое место</h2>
+          <form class="popup__forms" id = "form__add" name="form-add">
+            <input type="text" name="field-placename" placeholder="название" class="popup__input" id="enterplacename">
+            <input type="url" name="field-link" placeholder="ссылка на картинку" class="popup__input" id="enterlink">
+            <button class="popup__save" type="submit" id="submit__add">Сохранить</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="popup" id="zoomImg">
+        <div class="popup__zoomimg-box">
+          <img class="popup__zoomimg" src=" " alt=" ">
+          <button type="button" class="popup__close"></button>
+          <h2 class="popup__zoomimg_caption"></h2>
+        </div>  
+      </div>  
+
+      <template id="template">
+        <li class="element">
+          <div class="element__image-block">
+          <img class="element__image" src=" " alt=" ">
+          <button type="button" class="element__delete"></button>
+          </div>
+          <div class="element__caption">
+            <h2 class="element__name"></h2>
+            <button type="button" class="element__heart">
+            </button>
+          </div>
+        </li>
+      </template>
+      <script src="./scripts/index.js"></script>
+
 </body>
 
 </html>

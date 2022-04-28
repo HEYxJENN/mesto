@@ -6,6 +6,9 @@
   align-items: center;
   top: 0px;
   left: 0px;
-  display: none;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s, opacity 0.5s, linear; 
   position: fixed;
 }

@@ -13,7 +13,6 @@ const trashBin = document.querySelector(".element__delete");
 const listElements = document.querySelector(".elements");
 const itemTemplateContent=document.querySelector("#template").content;
 
-
 /*открытие + закрытие */
 const openPopupEditButton = document.querySelector(".profile__edit");
 const openPopupAddButton = document.querySelector(".profile__add");
@@ -143,16 +142,18 @@ rednderItem({
           name: maybePlaceName.value,
           link: maybeLink.value,
         });
-  closepopup(popupAdd);
+        let cardImageNew= document.querySelectorAll(".element__image");
+        cardImageNew.forEach(item => item.addEventListener("click",zoomImage));
+        closepopup(popupAdd);
 }
 
 formAdd.addEventListener("submit", addPlace);
-
-
+  
 /*картинка zoom*/
+
 const zoomImg = document.querySelector(".popup__zoomimg");
 const captionImg= document.querySelector(".popup__zoomimg_caption");
-const cardImage= document.querySelectorAll(".element__image");
+let cardImage= document.querySelectorAll(".element__image");
 const zoom = document.querySelector("#zoomImg");
 
 function zoomImage(evt) {
@@ -163,7 +164,16 @@ function zoomImage(evt) {
   captionImg.textContent=evt.target.alt;
   openpopup(zoom);
 }
-  
+
 cardImage.forEach(item => item.addEventListener("click",zoomImage));
 zoom.addEventListener("click", closePopupArea);
+
+
+
+
+
+
+
+
+
 

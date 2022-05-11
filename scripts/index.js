@@ -1,8 +1,6 @@
 /*переменные*/
-const popup = document.querySelector(".popup");
-const openPopupButton = document.querySelector(".profile__edit");
-const closePopupButton = document.querySelectorAll(".popup__close");
-const saveButton = document.querySelector(".popup__save");
+//эти переменные были не нужны, они из старой версии.Сейчас есть отдельные есть отдельные
+const buttonСlosePopup = document.querySelectorAll(".popup__close");
 const maybename = document.querySelector("#entername");
 const maybecaption = document.querySelector("#enterabout");
 const namenow = document.querySelector(".profile__name");
@@ -45,7 +43,7 @@ openPopupEditButton.addEventListener("click", () => openpopup(popupEdit ) );
 openPopupAddButton.addEventListener("click", () => openpopup(popupAdd) );
 
 
-closePopupButton.forEach(item => item.addEventListener("click", closepopup));
+buttonСlosePopup.forEach(item => item.addEventListener("click", closepopup));
 
 
 popupAdd.addEventListener("click", closePopupArea);

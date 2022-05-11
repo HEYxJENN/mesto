@@ -1,18 +1,17 @@
 .element__heart {
   padding: 0px;
   margin-right: 20px;
-  align-self:center;
+  align-self: center;
   min-width: 22px;
   min-height: 19px;
   transition: opacity 1s ease-in;
   background: transparent;
   border: none;
-  background-image:url(../../../images/Vector.svg);
+  background-image: url(../../../images/Vector.svg);
   background-size: cover;
   cursor: pointer;
 }
 
-
 .element__heart:hover {
   opacity: 0.5;
-  }
+}

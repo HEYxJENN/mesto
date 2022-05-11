@@ -7,13 +7,13 @@
   color: #000000;
   min-width: 358px;
   min-height: 27px;
-  border-bottom: 1px solid rgba(0,0,0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin-top: 54px;
   padding: 0px;
 }
 
 @media screen and (max-width: 767px) {
-  .popup__input  {
+  .popup__input {
     margin-top: 75px;
     min-width: 238px;
     min-height: 27px;
@@ -23,4 +23,3 @@
 .popup__input:last-of-type {
   margin-top: 30px;
 }
-

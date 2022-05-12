@@ -93,7 +93,7 @@ renderItems(items);
 
 /*сохранение профиль*/
 
-function formSubmitHandler(evt) {
+function formEditSubmitHandler(evt) {
   evt.preventDefault();
   const itsaname = nameMaybe.value;
   const itsacaption = captionMaybe.value;
@@ -102,7 +102,7 @@ function formSubmitHandler(evt) {
   closePopup(popupEdit);
 }
 
-form.addEventListener("submit", formSubmitHandler);
+form.addEventListener("submit", formEditSubmitHandler);
 
 /*лайки*/
 
@@ -129,16 +129,16 @@ function handleDelete(event) {
 
 /*добавление*/
 
-const maybePlaceName = document.querySelector("#enterplacename");
-const maybeLink = document.querySelector("#enterlink");
+const placeNameMaybe = document.querySelector("#enterplacename");
+const linkMaybe = document.querySelector("#enterlink");
 
 const addPlace = (evt) => {
   evt.preventDefault();
   rednderItem({
-    name: maybePlaceName.value,
-    link: maybeLink.value,
+    name: placeNameMaybe.value,
+    link: linkMaybe.value,
   });
-  let cardImageNew = document.querySelectorAll(".element__image");
+  const cardImageNew = document.querySelectorAll(".element__image");
   cardImageNew.forEach((item) => item.addEventListener("click", zoomImage));
   closePopup(popupAdd);
 };
@@ -149,7 +149,7 @@ formAdd.addEventListener("submit", addPlace);
 
 const zoomImg = document.querySelector(".popup__zoomimg");
 const captionImg = document.querySelector(".popup__zoomimg-caption");
-let cardImage = document.querySelectorAll(".element__image");
+const cardImage = document.querySelectorAll(".element__image");
 const zoom = document.querySelector("#zoomImg");
 
 function zoomImage(evt) {

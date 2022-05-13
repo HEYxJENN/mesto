@@ -1,12 +1,10 @@
 /*переменные*/
-//эти переменные были не нужны, они из старой версии.Сейчас есть отдельные есть отдельные
+//эти переменные с замечаниями были не нужны, они из старой версии.Сейчас есть другие.
 const buttonСlosePopup = document.querySelectorAll(".popup__close");
 const nameMaybe = document.querySelector("#entername");
 const captionMaybe = document.querySelector("#enterabout");
 const nameNow = document.querySelector(".profile__name");
 const captionNow = document.querySelector(".profile__caption");
-const form = document.querySelector(".popup__forms");
-const formAdd = document.querySelector("#popup__add");
 const trashBin = document.querySelector(".element__delete");
 const listElements = document.querySelector(".elements");
 const itemTemplateContent = document.querySelector("#template").content;
@@ -83,11 +81,17 @@ function rednderItem(item) {
   itemElement.querySelector(".element__image").src = item.link;
   itemElement.querySelector(".element__image").alt = item.name;
   setEventListeners(itemElement);
-  listElements.prepend(itemElement);
+  console.log(itemElement);
+  return itemElement;
+}
+
+function createItem(item) {
+  rednderItem(item);
+  listElements.prepend(item);
 }
 
 function renderItems(items) {
-  items.forEach(rednderItem);
+  items.forEach(createItem);
 }
 renderItems(items);
 
@@ -102,7 +106,7 @@ function formEditSubmitHandler(evt) {
   closePopup(popupEdit);
 }
 
-form.addEventListener("submit", formEditSubmitHandler);
+popupEdit.addEventListener("submit", formEditSubmitHandler);
 
 /*лайки*/
 
@@ -129,7 +133,7 @@ function handleDelete(event) {
 
 /*добавление*/
 
-const placeNameMaybe = document.querySelector("#enterplacename");
+/*const placeNameMaybe = document.querySelector("#enterplacename");
 const linkMaybe = document.querySelector("#enterlink");
 
 const addPlace = (evt) => {
@@ -143,7 +147,7 @@ const addPlace = (evt) => {
   closePopup(popupAdd);
 };
 
-formAdd.addEventListener("submit", addPlace);
+popupAdd.addEventListener("submit", addPlace); */
 
 /*картинка zoom*/
 

@@ -74,18 +74,22 @@ const items = [
   },
 ];
 
-function rednderItem(item) {
+function createItem(item) {
   console.log(item.name);
   const itemElement = itemTemplateContent.cloneNode(true);
   itemElement.querySelector(".element__name").textContent = item.name;
   itemElement.querySelector(".element__image").src = item.link;
   itemElement.querySelector(".element__image").alt = item.name;
   setEventListeners(itemElement);
-  listElements.prepend(itemElement);
+  return itemElement;
+}
+
+function renderItem(item) {
+  listElements.prepend(createItem(item));
 }
 
 function renderItems(items) {
-  items.forEach(rednderItem);
+  items.forEach(renderItem);
 }
 renderItems(items);
 
@@ -132,7 +136,7 @@ const linkMaybe = document.querySelector("#enterlink");
 
 const addPlace = (evt) => {
   evt.preventDefault();
-  rednderItem({
+  renderItem({
     name: placeNameMaybe.value,
     link: linkMaybe.value,
   });

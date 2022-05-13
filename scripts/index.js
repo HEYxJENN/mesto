@@ -81,34 +81,13 @@ function rednderItem(item) {
   itemElement.querySelector(".element__image").src = item.link;
   itemElement.querySelector(".element__image").alt = item.name;
   setEventListeners(itemElement);
-  console.log(itemElement);
-  listElements.prepend(itemElement);
-}
-
-/*function createItem(item) {
-  rednderItem(item);
-
-}
-*/
-
-function renderItems(items) {
-  items.forEach(renderElement);
-}
-renderItems(items);
-
-function rednderItem(item) {
-  console.log(item.name);
-  const itemElement = itemTemplateContent.cloneNode(true);
-  itemElement.querySelector(".element__name").textContent = item.name;
-  itemElement.querySelector(".element__image").src = item.link;
-  itemElement.querySelector(".element__image").alt = item.name;
-  setEventListeners(itemElement);
   listElements.prepend(itemElement);
 }
 
 function renderItems(items) {
   items.forEach(rednderItem);
 }
+renderItems(items);
 
 /*сохранение профиль*/
 

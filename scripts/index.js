@@ -82,18 +82,33 @@ function rednderItem(item) {
   itemElement.querySelector(".element__image").alt = item.name;
   setEventListeners(itemElement);
   console.log(itemElement);
-  return itemElement;
+  listElements.prepend(itemElement);
 }
 
-function createItem(item) {
+/*function createItem(item) {
   rednderItem(item);
-  listElements.prepend(item);
+
+}
+*/
+
+function renderItems(items) {
+  items.forEach(renderElement);
+}
+renderItems(items);
+
+function rednderItem(item) {
+  console.log(item.name);
+  const itemElement = itemTemplateContent.cloneNode(true);
+  itemElement.querySelector(".element__name").textContent = item.name;
+  itemElement.querySelector(".element__image").src = item.link;
+  itemElement.querySelector(".element__image").alt = item.name;
+  setEventListeners(itemElement);
+  listElements.prepend(itemElement);
 }
 
 function renderItems(items) {
-  items.forEach(createItem);
+  items.forEach(rednderItem);
 }
-renderItems(items);
 
 /*сохранение профиль*/
 
@@ -133,7 +148,7 @@ function handleDelete(event) {
 
 /*добавление*/
 
-/*const placeNameMaybe = document.querySelector("#enterplacename");
+const placeNameMaybe = document.querySelector("#enterplacename");
 const linkMaybe = document.querySelector("#enterlink");
 
 const addPlace = (evt) => {
@@ -147,7 +162,7 @@ const addPlace = (evt) => {
   closePopup(popupAdd);
 };
 
-popupAdd.addEventListener("submit", addPlace); */
+popupAdd.addEventListener("submit", addPlace);
 
 /*картинка zoom*/
 

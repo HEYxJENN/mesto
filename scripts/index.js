@@ -30,8 +30,6 @@ const closePopup = function (x) {
 };
 
 const closePopupArea = function (event) {
-  console.log(event.target);
-  console.log(event.currentTarget);
   if (event.target !== event.currentTarget) {
     return;
   }
@@ -75,7 +73,6 @@ const items = [
 ];
 
 function createItem(item) {
-  console.log(item.name);
   const itemElement = itemTemplateContent.cloneNode(true);
   itemElement.querySelector(".element__name").textContent = item.name;
   itemElement.querySelector(".element__image").src = item.link;
@@ -86,6 +83,8 @@ function createItem(item) {
 
 function renderItem(item) {
   listElements.prepend(createItem(item));
+  const cardImage = document.querySelectorAll(".element__image");
+  cardImage.forEach((item) => item.addEventListener("click", zoomImage));
 }
 
 function renderItems(items) {
@@ -140,8 +139,6 @@ const addPlace = (evt) => {
     name: placeNameMaybe.value,
     link: linkMaybe.value,
   });
-  const cardImageNew = document.querySelectorAll(".element__image");
-  cardImageNew.forEach((item) => item.addEventListener("click", zoomImage));
   closePopup(popupAdd);
 };
 
@@ -151,17 +148,13 @@ popupAdd.addEventListener("submit", addPlace);
 
 const zoomImg = document.querySelector(".popup__zoomimg");
 const captionImg = document.querySelector(".popup__zoomimg-caption");
-const cardImage = document.querySelectorAll(".element__image");
 const zoom = document.querySelector("#zoomImg");
 
 function zoomImage(evt) {
-  console.log(evt.target.src);
-  console.log(cardImage);
   zoomImg.src = evt.target.src;
   zoomImg.alt = evt.target.alt;
   captionImg.textContent = evt.target.alt;
   openPopup(zoom);
 }
 
-cardImage.forEach((item) => item.addEventListener("click", zoomImage));
 zoom.addEventListener("click", closePopupArea);

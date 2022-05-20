@@ -16,16 +16,19 @@ const popupEdit = document.querySelector("#popup__edit");
 const popupAdd = document.querySelector("#popup__add");
 
 const openPopup = function (element) {
+  nameMaybe.placeholder = nameNow.textContent;
+  captionMaybe.placeholder = captionNow.textContent;
   element.classList.add("popup_opened");
   element
     .querySelector(".popup__close")
     .addEventListener("click", () => closePopup(element), { once: true });
 };
 
-nameMaybe.placeholder = nameNow.textContent;
-captionMaybe.placeholder = captionNow.textContent;
-
 const closePopup = function (x) {
+  nameMaybe.value = "";
+  captionMaybe.value = "";
+  placeNameMaybe.value = "";
+  linkMaybe.value = "";
   x.classList.remove("popup_opened");
 };
 
@@ -83,8 +86,8 @@ function createItem(item) {
 
 function renderItem(item) {
   listElements.prepend(createItem(item));
-  const cardImage = document.querySelectorAll(".element__image");
-  cardImage.forEach((item) => item.addEventListener("click", zoomImage));
+  const cardImage = document.querySelector(".element__image");
+  cardImage.addEventListener("click", zoomImage);
 }
 
 function renderItems(items) {

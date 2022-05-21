@@ -86,8 +86,6 @@ function createItem(item) {
 
 function renderItem(item) {
   listElements.prepend(createItem(item));
-  const cardImage = document.querySelector(".element__image");
-  cardImage.addEventListener("click", zoomImage);
 }
 
 function renderItems(items) {
@@ -124,6 +122,9 @@ function setEventListeners(itemElement) {
   itemElement
     .querySelector(".element__heart")
     .addEventListener("click", handleLike);
+  itemElement
+    .querySelector(".element__image")
+    .addEventListener("click", zoomImage);
 }
 
 function handleDelete(event) {

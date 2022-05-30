@@ -23,3 +23,7 @@
 .popup__input:last-of-type {
   margin-top: 30px;
 }
+
+.popup__input:invalid {
+  border-bottom: 1px solid rgb(245, 6, 6);
+}

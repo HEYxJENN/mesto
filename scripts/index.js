@@ -18,18 +18,19 @@ const popupAdd = document.querySelector("#popup__add");
 const openPopup = function (element) {
   nameMaybe.placeholder = nameNow.textContent;
   captionMaybe.placeholder = captionNow.textContent;
+  document.addEventListener("keydown", closePopupByEsc);
   element.classList.add("popup_opened");
   element
     .querySelector(".popup__close")
     .addEventListener("click", () => closePopup(element), { once: true });
 };
 
-const closePopup = function (x) {
+const closePopup = function (element) {
   nameMaybe.value = "";
   captionMaybe.value = "";
   placeNameMaybe.value = "";
   linkMaybe.value = "";
-  x.classList.remove("popup_opened");
+  element.classList.remove("popup_opened");
 };
 
 const closePopupArea = function (event) {
@@ -43,6 +44,13 @@ popupOpenEditButton.addEventListener("click", () => openPopup(popupEdit));
 popupOpenAddButton.addEventListener("click", () => openPopup(popupAdd));
 
 buttonСlosePopup.forEach((item) => item.addEventListener("click", closePopup));
+
+function closePopupByEsc(evt) {
+  console.log(evt.key);
+  if (evt.key === "Escape") {
+    closePopup;
+  }
+}
 
 popupAdd.addEventListener("click", closePopupArea);
 popupEdit.addEventListener("click", closePopupArea);

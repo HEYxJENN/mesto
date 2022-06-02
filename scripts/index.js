@@ -1,6 +1,5 @@
 /*переменные*/
-//эти переменные с замечаниями были не нужны, они из старой версии.Сейчас есть другие.
-const buttonСlosePopup = document.querySelectorAll(".popup__close");
+const buttonClosePopup = document.querySelectorAll(".popup__close");
 const nameMaybe = document.querySelector("#entername");
 const captionMaybe = document.querySelector("#enterabout");
 const nameNow = document.querySelector(".profile__name");
@@ -9,20 +8,22 @@ const trashBin = document.querySelector(".element__delete");
 const listElements = document.querySelector(".elements");
 const itemTemplateContent = document.querySelector("#template").content;
 
-/*открытие + закрытие */
 const popupOpenEditButton = document.querySelector(".profile__edit");
 const popupOpenAddButton = document.querySelector(".profile__add");
 const popupEdit = document.querySelector("#popup__edit");
 const popupAdd = document.querySelector("#popup__add");
 
+/*открытие + закрытие */
+
 const openPopup = function (element) {
   nameMaybe.placeholder = nameNow.textContent;
   captionMaybe.placeholder = captionNow.textContent;
 
-  element.classList.add("popup_opened");
   element
     .querySelector(".popup__close")
     .addEventListener("click", () => closePopup(element), { once: true });
+
+  element.classList.add("popup_opened");
 
   document.addEventListener("keydown", function closePopupByEsc(evt) {
     console.log(evt.key);
@@ -30,6 +31,10 @@ const openPopup = function (element) {
       closePopup(element);
     }
   });
+
+  enableValidation(config);
+
+  document.querySelector(".popup_input").border = "black";
 };
 
 const closePopup = function (element) {
@@ -49,8 +54,6 @@ const closePopupArea = function (event) {
 
 popupOpenEditButton.addEventListener("click", () => openPopup(popupEdit));
 popupOpenAddButton.addEventListener("click", () => openPopup(popupAdd));
-
-buttonСlosePopup.forEach((item) => item.addEventListener("click", closePopup));
 
 popupAdd.addEventListener("click", closePopupArea);
 popupEdit.addEventListener("click", closePopupArea);

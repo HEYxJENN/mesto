@@ -13,6 +13,10 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(config.errorClass);
+  const errorElementUnderline = formElement.querySelector(
+    `.${inputElement.id}`
+  );
+  errorElementUnderline.classList.add("popup__input_invalid");
 };
 
 const hideInputError = (formElement, inputElement) => {
@@ -20,6 +24,10 @@ const hideInputError = (formElement, inputElement) => {
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.classList.remove(config.errorClass);
   errorElement.textContent = "";
+  const errorElementUnderline = formElement.querySelector(
+    `.${inputElement.id}`
+  );
+  errorElementUnderline.classList.remove("popup__input_invalid");
 };
 
 const checkInputValidity = (formElement, inputElement) => {
@@ -58,8 +66,6 @@ const enableValidation = (config) => {
     });
   });
 };
-
-enableValidation(config);
 
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {

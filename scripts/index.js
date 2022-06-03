@@ -13,16 +13,20 @@ const popupOpenAddButton = document.querySelector(".profile__add");
 const popupEdit = document.querySelector("#popup__edit");
 const popupAdd = document.querySelector("#popup__add");
 
-/*открытие + закрытие */
+const zoomImg = document.querySelector(".popup__zoomimg");
+const captionImg = document.querySelector(".popup__zoomimg-caption");
+const zoom = document.querySelector("#zoomImg");
+
+const placeNameMaybe = document.querySelector("#enterplacename");
+const linkMaybe = document.querySelector("#enterlink");
+
+//функции открытия
 
 const openPopup = function (element) {
-  nameMaybe.placeholder = nameNow.textContent;
-  captionMaybe.placeholder = captionNow.textContent;
-
+  //не тут. поменять
   element
     .querySelector(".popup__close")
     .addEventListener("click", () => closePopup(element), { once: true });
-
   element.classList.add("popup_opened");
 
   document.addEventListener("keydown", function closePopupByEsc(evt) {
@@ -33,16 +37,30 @@ const openPopup = function (element) {
   });
 
   enableValidation(config);
-
-  document.querySelector(".popup_input").border = "black";
 };
 
+const openProfilePopup = function (element) {
+  element.querySelector(".popup__forms").reset();
+  nameMaybe.placeholder = nameNow.textContent;
+  captionMaybe.placeholder = captionNow.textContent;
+  openPopup(element);
+};
+
+const openAddPopup = function (element) {
+  element.querySelector(".popup__forms").reset();
+  openPopup(element);
+};
+
+//функции закрытия
 const closePopup = function (element) {
-  nameMaybe.value = "";
-  captionMaybe.value = "";
-  placeNameMaybe.value = "";
-  linkMaybe.value = "";
   element.classList.remove("popup_opened");
+  //ошибка?
+  document.addEventListener("keydown", function closePopupByEsc(evt) {
+    console.log(evt.key);
+    if (evt.key === "Escape") {
+      closePopup(element);
+    }
+  });
 };
 
 const closePopupArea = function (event) {
@@ -51,12 +69,6 @@ const closePopupArea = function (event) {
   }
   closePopup(event.target);
 };
-
-popupOpenEditButton.addEventListener("click", () => openPopup(popupEdit));
-popupOpenAddButton.addEventListener("click", () => openPopup(popupAdd));
-
-popupAdd.addEventListener("click", closePopupArea);
-popupEdit.addEventListener("click", closePopupArea);
 
 /*добавление кода*/
 const items = [
@@ -115,8 +127,6 @@ function formEditSubmitHandler(evt) {
   closePopup(popupEdit);
 }
 
-popupEdit.addEventListener("submit", formEditSubmitHandler);
-
 /*лайки*/
 
 function handleLike(event) {
@@ -126,6 +136,48 @@ function handleLike(event) {
 }
 
 /*удаление*/
+
+function handleDelete(event) {
+  const itemElement = event.target.closest(".element");
+  itemElement.remove();
+}
+
+/*добавление*/
+
+const addPlace = (evt) => {
+  evt.preventDefault();
+  renderItem({
+    name: placeNameMaybe.value,
+    link: linkMaybe.value,
+  });
+  closePopup(popupAdd);
+};
+
+/*картинка zoom*/
+function zoomImage(evt) {
+  zoomImg.src = evt.target.src;
+  zoomImg.alt = evt.target.alt;
+  captionImg.textContent = evt.target.alt;
+  openPopup(zoom);
+}
+
+//слушатели
+//открытия
+popupOpenEditButton.addEventListener("click", () =>
+  openProfilePopup(popupEdit)
+);
+popupOpenAddButton.addEventListener("click", () => openAddPopup(popupAdd));
+//закрытия
+popupAdd.addEventListener("click", closePopupArea);
+popupEdit.addEventListener("click", closePopupArea);
+zoom.addEventListener("click", closePopupArea);
+//зума
+
+//сабмита
+popupEdit.addEventListener("submit", formEditSubmitHandler);
+popupAdd.addEventListener("submit", addPlace);
+
+//лайкудалениезум
 function setEventListeners(itemElement) {
   itemElement
     .querySelector(".element__delete")
@@ -137,39 +189,3 @@ function setEventListeners(itemElement) {
     .querySelector(".element__image")
     .addEventListener("click", zoomImage);
 }
-
-function handleDelete(event) {
-  const itemElement = event.target.closest(".element");
-  itemElement.remove();
-}
-
-/*добавление*/
-
-const placeNameMaybe = document.querySelector("#enterplacename");
-const linkMaybe = document.querySelector("#enterlink");
-
-const addPlace = (evt) => {
-  evt.preventDefault();
-  renderItem({
-    name: placeNameMaybe.value,
-    link: linkMaybe.value,
-  });
-  closePopup(popupAdd);
-};
-
-popupAdd.addEventListener("submit", addPlace);
-
-/*картинка zoom*/
-
-const zoomImg = document.querySelector(".popup__zoomimg");
-const captionImg = document.querySelector(".popup__zoomimg-caption");
-const zoom = document.querySelector("#zoomImg");
-
-function zoomImage(evt) {
-  zoomImg.src = evt.target.src;
-  zoomImg.alt = evt.target.alt;
-  captionImg.textContent = evt.target.alt;
-  openPopup(zoom);
-}
-
-zoom.addEventListener("click", closePopupArea);

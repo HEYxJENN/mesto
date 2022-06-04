@@ -21,20 +21,18 @@ const placeNameMaybe = document.querySelector("#enterplacename");
 const linkMaybe = document.querySelector("#enterlink");
 
 //функции открытия
-
 const openPopup = function (element) {
-  //не тут. поменять
-  element
-    .querySelector(".popup__close")
-    .addEventListener("click", () => closePopup(element), { once: true });
   element.classList.add("popup_opened");
 
-  document.addEventListener("keydown", function closePopupByEsc(evt) {
-    console.log(evt.key);
+  function closePopupByEsc(evt) {
+    console.log("close popup", evt.key);
     if (evt.key === "Escape") {
       closePopup(element);
+      document.removeEventListener("keydown", closePopupByEsc);
     }
-  });
+  }
+
+  document.addEventListener("keydown", closePopupByEsc);
 
   enableValidation(config);
 };
@@ -54,13 +52,6 @@ const openAddPopup = function (element) {
 //функции закрытия
 const closePopup = function (element) {
   element.classList.remove("popup_opened");
-  //ошибка?
-  document.addEventListener("keydown", function closePopupByEsc(evt) {
-    console.log(evt.key);
-    if (evt.key === "Escape") {
-      closePopup(element);
-    }
-  });
 };
 
 const closePopupArea = function (event) {
@@ -189,3 +180,10 @@ function setEventListeners(itemElement) {
     .querySelector(".element__image")
     .addEventListener("click", zoomImage);
 }
+
+//нажатиекрестика
+document.querySelectorAll(".popup").forEach((element) => {
+  element
+    .querySelector(".popup__close")
+    .addEventListener("click", () => closePopup(element));
+});

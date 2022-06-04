@@ -1,4 +1,4 @@
-/*переменные*/
+/*переменныеее*/
 const buttonClosePopup = document.querySelectorAll(".popup__close");
 const nameMaybe = document.querySelector("#entername");
 const captionMaybe = document.querySelector("#enterabout");

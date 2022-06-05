@@ -84,13 +84,20 @@ function hasInvalidInput(inputList) {
   });
 }
 
-function toggleButtonState(inputList, buttonElement, buttonConfig) {
-  const { inactiveButtonClass } = buttonConfig;
+function toggleButtonState(inputList, buttonElement, { inactiveButtonClass }) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.setAttribute("disabled", true);
+    disableSubmitButton(buttonElement, { inactiveButtonClass });
   } else {
-    buttonElement.classList.remove(inactiveButtonClass);
-    buttonElement.removeAttribute("disabled");
+    enableSubmitButton(buttonElement, { inactiveButtonClass });
   }
+}
+
+function enableSubmitButton(buttonElement, { inactiveButtonClass }) {
+  buttonElement.classList.remove(inactiveButtonClass);
+  buttonElement.removeAttribute("disabled");
+}
+
+function disableSubmitButton(buttonElement, { inactiveButtonClass }) {
+  buttonElement.classList.add(inactiveButtonClass);
+  buttonElement.setAttribute("disabled", true);
 }

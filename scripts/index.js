@@ -20,39 +20,42 @@ const zoom = document.querySelector("#zoomImg");
 const placeNameMaybe = document.querySelector("#enterplacename");
 const linkMaybe = document.querySelector("#enterlink");
 
+enableValidation(config);
+
 //функции открытия
 const openPopup = function (element) {
   element.classList.add("popup_opened");
 
-  function closePopupByEsc(evt) {
-    console.log("close popup", evt.key);
-    if (evt.key === "Escape") {
-      closePopup(element);
-      document.removeEventListener("keydown", closePopupByEsc);
-    }
-  }
-
   document.addEventListener("keydown", closePopupByEsc);
-
-  enableValidation(config);
 };
 
 const openProfilePopup = function (element) {
   element.querySelector(".popup__forms").reset();
   nameMaybe.placeholder = nameNow.textContent;
   captionMaybe.placeholder = captionNow.textContent;
+  disableSubmitButton(element.querySelector(".popup__save"), config);
   openPopup(element);
 };
 
 const openAddPopup = function (element) {
   element.querySelector(".popup__forms").reset();
+  disableSubmitButton(element.querySelector(".popup__save"), config);
   openPopup(element);
 };
 
 //функции закрытия
 const closePopup = function (element) {
+  document.removeEventListener("keydown", closePopupByEsc);
+
   element.classList.remove("popup_opened");
 };
+
+function closePopupByEsc(evt) {
+  if (evt.key === "Escape") {
+    const popup = document.querySelector(".popup_opened");
+    closePopup(popup);
+  }
+}
 
 const closePopupArea = function (event) {
   if (event.target !== event.currentTarget) {
@@ -111,10 +114,8 @@ renderItems(items);
 
 function formEditSubmitHandler(evt) {
   evt.preventDefault();
-  const itsaname = nameMaybe.value;
-  const itsacaption = captionMaybe.value;
-  nameNow.textContent = itsaname;
-  captionNow.textContent = itsacaption;
+  nameNow.textContent = nameMaybe.value;
+  captionNow.textContent = captionMaybe.value;
   closePopup(popupEdit);
 }
 

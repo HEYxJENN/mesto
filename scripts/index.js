@@ -3,6 +3,8 @@ import { config } from "../utils/config.js";
 
 import { items } from "../utils/items.js";
 
+import { Card } from "./card.js";
+
 import {
   buttonClosePopup,
   nameMaybe,
@@ -26,7 +28,7 @@ import {
 import { FormValidator } from "./FormValidator.js";
 
 //функции открытия
-const openPopup = function (element) {
+export const openPopup = function (element) {
   element.classList.add("popup_opened");
 
   document.addEventListener("keydown", closePopupByEsc);
@@ -72,26 +74,6 @@ const closePopupArea = function (event) {
   closePopup(event.target);
 };
 
-/*добавление кода*/
-
-function createItem(item) {
-  const itemElement = itemTemplateContent.cloneNode(true);
-  itemElement.querySelector(".element__name").textContent = item.name;
-  itemElement.querySelector(".element__image").src = item.link;
-  itemElement.querySelector(".element__image").alt = item.name;
-  setEventListeners(itemElement);
-  return itemElement;
-}
-
-function renderItem(item) {
-  listElements.prepend(createItem(item));
-}
-
-function renderItems(items) {
-  items.forEach(renderItem);
-}
-renderItems(items);
-
 /*сохранение профиль*/
 
 function formEditSubmitHandler(evt) {
@@ -101,45 +83,36 @@ function formEditSubmitHandler(evt) {
   closePopup(popupEdit);
 }
 
-/*лайки*/
-
-function handleLike(event) {
-  const itemElement = event.target;
-  itemElement.classList.toggle("element__heart_active");
-  itemElement.classList.toggle("element__heart");
-}
-
-/*удаление*/
-
-function handleDelete(event) {
-  const itemElement = event.target.closest(".element");
-  itemElement.remove();
-}
-
 /*добавление*/
 
 const addPlace = (evt) => {
   evt.preventDefault();
-  renderItem({
-    name: placeNameMaybe.value,
-    link: linkMaybe.value,
-  });
+
+  const card = new Card(
+    placeNameMaybe.value,
+    linkMaybe.value,
+    "#template",
+    config
+  );
+  const cardElement = card.createItem();
+  listElements.prepend(cardElement);
+
   closePopup(popupAdd);
 };
 
-/*картинка zoom*/
-function zoomImage(evt) {
-  zoomImg.src = evt.target.src;
-  zoomImg.alt = evt.target.alt;
-  captionImg.textContent = evt.target.alt;
-  openPopup(zoom);
-}
-
+//включение валидации
 const FormValidators = {};
 
 Array.from(document.forms).forEach((formElement) => {
   FormValidators[formElement.name] = new FormValidator(config, formElement);
   FormValidators[formElement.name].enableValidation();
+});
+
+//Перебор итемс
+items.forEach((item) => {
+  const card = new Card(item.name, item.link, "#template", config);
+  const cardElement = card.createItem();
+  listElements.prepend(cardElement);
 });
 
 //слушатели
@@ -156,19 +129,6 @@ zoom.addEventListener("click", closePopupArea);
 //сабмита
 popupEdit.addEventListener("submit", formEditSubmitHandler);
 popupAdd.addEventListener("submit", addPlace);
-
-//лайкудалениезум
-function setEventListeners(itemElement) {
-  itemElement
-    .querySelector(".element__delete")
-    .addEventListener("click", handleDelete);
-  itemElement
-    .querySelector(".element__heart")
-    .addEventListener("click", handleLike);
-  itemElement
-    .querySelector(".element__image")
-    .addEventListener("click", zoomImage);
-}
 
 //нажатиекрестика
 document.querySelectorAll(".popup").forEach((element) => {

@@ -1,26 +1,29 @@
-/*переменныеее*/
-const buttonClosePopup = document.querySelectorAll(".popup__close");
-const nameMaybe = document.querySelector("#entername");
-const captionMaybe = document.querySelector("#enterabout");
-const nameNow = document.querySelector(".profile__name");
-const captionNow = document.querySelector(".profile__caption");
-const trashBin = document.querySelector(".element__delete");
-const listElements = document.querySelector(".elements");
-const itemTemplateContent = document.querySelector("#template").content;
+//импорты
+import { config } from "../utils/config.js";
 
-const popupOpenEditButton = document.querySelector(".profile__edit");
-const popupOpenAddButton = document.querySelector(".profile__add");
-const popupEdit = document.querySelector("#popup__edit");
-const popupAdd = document.querySelector("#popup__add");
+import { items } from "../utils/items.js";
 
-const zoomImg = document.querySelector(".popup__zoomimg");
-const captionImg = document.querySelector(".popup__zoomimg-caption");
-const zoom = document.querySelector("#zoomImg");
+import {
+  buttonClosePopup,
+  nameMaybe,
+  captionMaybe,
+  nameNow,
+  captionNow,
+  trashBin,
+  listElements,
+  itemTemplateContent,
+  popupOpenEditButton,
+  popupOpenAddButton,
+  popupEdit,
+  popupAdd,
+  zoomImg,
+  captionImg,
+  zoom,
+  placeNameMaybe,
+  linkMaybe,
+} from "../utils/consts.js";
 
-const placeNameMaybe = document.querySelector("#enterplacename");
-const linkMaybe = document.querySelector("#enterlink");
-
-enableValidation(config);
+import { FormValidator } from "./FormValidator.js";
 
 //функции открытия
 const openPopup = function (element) {
@@ -33,13 +36,18 @@ const openProfilePopup = function (element) {
   element.querySelector(".popup__forms").reset();
   nameMaybe.placeholder = nameNow.textContent;
   captionMaybe.placeholder = captionNow.textContent;
-  disableSubmitButton(element.querySelector(".popup__save"), config);
+
+  FormValidators["form-edit"].disableSubmitButton(
+    element.querySelector(".popup__save")
+  );
   openPopup(element);
 };
 
 const openAddPopup = function (element) {
   element.querySelector(".popup__forms").reset();
-  disableSubmitButton(element.querySelector(".popup__save"), config);
+  FormValidators["form-add"].disableSubmitButton(
+    element.querySelector(".popup__save")
+  );
   openPopup(element);
 };
 
@@ -65,32 +73,6 @@ const closePopupArea = function (event) {
 };
 
 /*добавление кода*/
-const items = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
 
 function createItem(item) {
   const itemElement = itemTemplateContent.cloneNode(true);
@@ -153,6 +135,13 @@ function zoomImage(evt) {
   openPopup(zoom);
 }
 
+const FormValidators = {};
+
+Array.from(document.forms).forEach((formElement) => {
+  FormValidators[formElement.name] = new FormValidator(config, formElement);
+  FormValidators[formElement.name].enableValidation();
+});
+
 //слушатели
 //открытия
 popupOpenEditButton.addEventListener("click", () =>
@@ -163,7 +152,6 @@ popupOpenAddButton.addEventListener("click", () => openAddPopup(popupAdd));
 popupAdd.addEventListener("click", closePopupArea);
 popupEdit.addEventListener("click", closePopupArea);
 zoom.addEventListener("click", closePopupArea);
-//зума
 
 //сабмита
 popupEdit.addEventListener("submit", formEditSubmitHandler);

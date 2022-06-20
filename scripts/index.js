@@ -23,6 +23,9 @@ import {
   zoom,
   placeNameMaybe,
   linkMaybe,
+  formAdd,
+  formEdit,
+  popups,
 } from "../utils/consts.js";
 
 import { FormValidator } from "./FormValidator.js";
@@ -35,21 +38,23 @@ export const openPopup = function (element) {
 };
 
 const openProfilePopup = function (element) {
-  element.querySelector(".popup__forms").reset();
-  nameMaybe.placeholder = nameNow.textContent;
+  formEdit.reset();
+  nameMaybe.value = nameNow.textContent;
+  //Я не уверен, что согласен с этим замечанием,
+  //мне кажется, в предыдущих заданиях говорилось,
+  //что при открытии должен быть плейсхолдер.
+  //Вэлью вставляется в функции сохранения как значение на странице.
+  //87 строка, функция handleProfileFormSubmit,
+  //а тут логичнее сразу вводить новые данные,  если открыл редактирование профиля
   captionMaybe.placeholder = captionNow.textContent;
+  formValidators["form-edit"].resetValidation();
 
-  FormValidators["form-edit"].disableSubmitButton(
-    element.querySelector(".popup__save")
-  );
   openPopup(element);
 };
 
 const openAddPopup = function (element) {
-  element.querySelector(".popup__forms").reset();
-  FormValidators["form-add"].disableSubmitButton(
-    element.querySelector(".popup__save")
-  );
+  formAdd.reset();
+  formValidators["form-add"].resetValidation();
   openPopup(element);
 };
 
@@ -60,6 +65,17 @@ const closePopup = function (element) {
   element.classList.remove("popup_opened");
 };
 
+popups.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup_opened")) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains("popup__close")) {
+      closePopup(popup);
+    }
+  });
+});
+
 function closePopupByEsc(evt) {
   if (evt.key === "Escape") {
     const popup = document.querySelector(".popup_opened");
@@ -67,52 +83,39 @@ function closePopupByEsc(evt) {
   }
 }
 
-const closePopupArea = function (event) {
-  if (event.target !== event.currentTarget) {
-    return;
-  }
-  closePopup(event.target);
-};
-
 /*сохранение профиль*/
 
-function formEditSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   nameNow.textContent = nameMaybe.value;
   captionNow.textContent = captionMaybe.value;
   closePopup(popupEdit);
 }
 
-/*добавление*/
+//создание карточки
+function createCard(name, link) {
+  const card = new Card(name, link, "#template", config);
+  const cardElement = card.createItem();
+  return cardElement;
+}
 
+//добавление новых карточек
 const addPlace = (evt) => {
   evt.preventDefault();
-
-  const card = new Card(
-    placeNameMaybe.value,
-    linkMaybe.value,
-    "#template",
-    config
-  );
-  const cardElement = card.createItem();
-  listElements.prepend(cardElement);
-
+  listElements.prepend(createCard(placeNameMaybe.value, linkMaybe.value));
   closePopup(popupAdd);
 };
 
 //включение валидации
-const FormValidators = {};
-
+const formValidators = {};
 Array.from(document.forms).forEach((formElement) => {
-  FormValidators[formElement.name] = new FormValidator(config, formElement);
-  FormValidators[formElement.name].enableValidation();
+  formValidators[formElement.name] = new FormValidator(config, formElement);
+  formValidators[formElement.name].enableValidation();
 });
 
-//Перебор итемс
+//отрисовка начальных карточек
 items.forEach((item) => {
-  const card = new Card(item.name, item.link, "#template", config);
-  const cardElement = card.createItem();
-  listElements.prepend(cardElement);
+  listElements.prepend(createCard(item.name, item.link));
 });
 
 //слушатели
@@ -121,18 +124,7 @@ popupOpenEditButton.addEventListener("click", () =>
   openProfilePopup(popupEdit)
 );
 popupOpenAddButton.addEventListener("click", () => openAddPopup(popupAdd));
-//закрытия
-popupAdd.addEventListener("click", closePopupArea);
-popupEdit.addEventListener("click", closePopupArea);
-zoom.addEventListener("click", closePopupArea);
 
 //сабмита
-popupEdit.addEventListener("submit", formEditSubmitHandler);
+popupEdit.addEventListener("submit", handleProfileFormSubmit);
 popupAdd.addEventListener("submit", addPlace);
-
-//нажатиекрестика
-document.querySelectorAll(".popup").forEach((element) => {
-  element
-    .querySelector(".popup__close")
-    .addEventListener("click", () => closePopup(element));
-});

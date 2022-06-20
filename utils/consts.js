@@ -20,6 +20,11 @@ const zoom = document.querySelector("#zoomImg");
 const placeNameMaybe = document.querySelector("#enterplacename");
 const linkMaybe = document.querySelector("#enterlink");
 
+const formEdit = document.querySelector("#form__edit");
+const formAdd = document.querySelector("#form__add");
+
+const popups = document.querySelectorAll(".popup");
+
 export {
   buttonClosePopup,
   nameMaybe,
@@ -38,4 +43,7 @@ export {
   zoom,
   placeNameMaybe,
   linkMaybe,
+  formAdd,
+  formEdit,
+  popups,
 };

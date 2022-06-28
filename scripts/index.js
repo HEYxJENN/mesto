@@ -40,15 +40,8 @@ export const openPopup = function (element) {
 const openProfilePopup = function (element) {
   formEdit.reset();
   nameMaybe.value = nameNow.textContent;
-  //Я не уверен, что согласен с этим замечанием,
-  //мне кажется, в предыдущих заданиях говорилось,
-  //что при открытии должен быть плейсхолдер.
-  //Вэлью вставляется в функции сохранения как значение на странице.
-  //87 строка, функция handleProfileFormSubmit,
-  //а тут логичнее сразу вводить новые данные,  если открыл редактирование профиля
-  captionMaybe.placeholder = captionNow.textContent;
+  captionMaybe.value = captionNow.textContent;
   formValidators["form-edit"].resetValidation();
-
   openPopup(element);
 };
 

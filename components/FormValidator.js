@@ -89,11 +89,13 @@ export class FormValidator {
     this._buttonElement.setAttribute("disabled", true);
   };
 
-  resetValidation() {
+  resetValidation = () => {
+    console.log(this._formSelector);
+    console.log(this._inputList);
     this._toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
-  }
+  };
 }

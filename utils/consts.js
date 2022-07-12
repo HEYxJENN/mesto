@@ -25,6 +25,10 @@ const formAdd = document.querySelector("#form__add");
 
 const popups = document.querySelectorAll(".popup");
 
+const edit = "#popup__edit";
+const add = "#popup__add";
+const zoomer = "#zoomImg";
+
 export {
   buttonClosePopup,
   nameMaybe,
@@ -46,4 +50,7 @@ export {
   formAdd,
   formEdit,
   popups,
+  edit,
+  add,
+  zoomer,
 };

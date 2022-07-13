@@ -11,7 +11,6 @@ export class FormValidator {
     this._inputList = Array.from(
       this._formSelector.querySelectorAll(`${this._inputSelector}`)
     );
-    //я ведь правильно понял, что можно оставлять их в констуркторе в таком виде?!
     this._buttonElement = this._formSelector.querySelector(
       this._submitButtonSelector
     );

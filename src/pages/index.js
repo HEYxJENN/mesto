@@ -1,11 +1,11 @@
 //импорты
+import "./index.css";
+
 import { config } from "../utils/config.js";
 
 import { items } from "../utils/items.js";
 
 import { Card } from "../components/Card.js";
-
-import { Popup } from "../components/Popup.js";
 
 import { Section } from "../components/Section.js";
 
@@ -16,26 +16,11 @@ import { FormValidator } from "../components/FormValidator.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 
 import {
-  buttonClosePopup,
-  nameMaybe,
-  captionMaybe,
   nameNow,
   captionNow,
-  trashBin,
   listElements,
-  itemTemplateContent,
   popupOpenEditButton,
   popupOpenAddButton,
-  popupEdit,
-  popupAdd,
-  zoomImg,
-  captionImg,
-  zoom,
-  placeNameMaybe,
-  linkMaybe,
-  formAdd,
-  formEdit,
-  popups,
   edit,
   add,
   zoomer,
@@ -56,15 +41,11 @@ const userInfo = new UserInfo({
   captionSelector: captionNow,
 });
 
-const popupProfileInfo = new PopupWithForm(
-  edit,
-  {
-    callback: (data) => {
-      userInfo.setUserInfo(data);
-    },
-  }
-  // { callback: userInfo.setUserInfo(userInfo.getUserInfo()) }
-);
+const popupProfileInfo = new PopupWithForm(edit, {
+  callback: (data) => {
+    userInfo.setUserInfo(data);
+  },
+});
 
 const popupAddNewPlace = new PopupWithForm(add, {
   callback: (data) => {

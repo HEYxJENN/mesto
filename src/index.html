@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="./pages/index.css" />
+  <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="4 проект" />
   <meta name="keywords" content="html, css, javascript" />
@@ -15,19 +15,22 @@
   <div class="page">
     <!--+++-->
     <header class="header">
-      <img class="logo" src="./images/logo_white.svg" alt="логотип с надписью Место">
+      <!-- <img class="logo" src="/src/images/logo_white.svg" alt="логотип с надписью Место"> -->
+      <img src="<%=require('./images/logo_white.svg')%>" alt="Логотип" class="logo">
+
     </header>
     <!--+++-->
     <main class="content">
 
       <section class="profile">
-        <img class="profile__image" src="./images/kusto.png" alt="фото Жака Ива Кусто">
+        <img class="profile__image" src="<%=require('./images/kusto.png')%>" alt="фото Жака Ива Кусто">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто Ибн Ахмед Хамид Третий Всея Руси</h1>
-          <img class="profile__edit" src="./images/EditButton.svg" id="edit" alt="кнопка редактирования">
+          <img class="profile__edit" src="<%=require('./images/EditButton.svg')%>" id="edit"
+            alt="кнопка редактирования">
         </div>
         <p class="profile__caption">Исследователь </p>
-        <img class="profile__add" src="./images/plus.svg" alt="кнопка добавления">
+        <img class="profile__add" src="<%=require('./images/plus.svg')%>" alt="кнопка добавления">
       </section>
 
       <section>
@@ -107,9 +110,9 @@
         </div>
       </li>
     </template>
-    <script type="module" src="./components/FormValidator.js"></script>
+    <!-- <script type="module" src="./components/FormValidator.js"></script>
     <script type="module" src="./pages/index.js"></script>
-    <script type="module" src="./components/Card.js"></script>
+    <script type="module" src="./components/Card.js"></script> -->
   </div>
 </body>
 

@@ -1,31 +1,6 @@
 import { Popup } from "./Popup.js";
-import {
-  buttonClosePopup,
-  nameMaybe,
-  captionMaybe,
-  nameNow,
-  captionNow,
-  trashBin,
-  listElements,
-  itemTemplateContent,
-  popupOpenEditButton,
-  popupOpenAddButton,
-  popupEdit,
-  popupAdd,
-  zoomImg,
-  captionImg,
-  zoom,
-  placeNameMaybe,
-  linkMaybe,
-  formAdd,
-  formEdit,
-  popups,
-  edit,
-  add,
-} from "../utils/consts.js";
-
+import { add } from "../utils/consts.js";
 import { config } from "../utils/config.js";
-import { UserInfo } from "./UserInfo.js";
 
 export class PopupWithForm extends Popup {
   constructor(popupSelector, { callback }) {
@@ -46,13 +21,6 @@ export class PopupWithForm extends Popup {
     });
     return values;
   };
-
-  _setInputValues(values) {
-    // console.log(`values!!!${values}`);
-    // this._InputList.forEach((input) => {
-    //   input.value = values[input.id.slice(5)];
-    // });
-  }
 
   _handleSubmit = (evt) => {
     console.log(evt);
@@ -81,11 +49,6 @@ export class PopupWithForm extends Popup {
     if (this._popupSelector === add) {
       this._formElement.reset();
     }
-    // this._setInputValues(
-    //     { values: (nameNow.textContent, captionNow.value) });
-    // } else {
-    //   this._formElement.reset();
-    // }
     super.openPopup();
   }
 

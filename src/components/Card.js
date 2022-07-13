@@ -1,19 +1,9 @@
-//ненужныевроде
-// // import { openPopup } from "../pages/index.js";
-// import { zoomImg, zoom, captionImg } from "../utils/consts.js";
-// import { Popup } from "./Popup";
-
-//НУЖНЫЕ если попапимг
-import { zoomer } from "../utils/consts.js";
-import { PopupWithImage } from "./PopupWithImage.js";
-
 export class Card {
   constructor(name, link, template, callback) {
     this._name = name;
     this._link = link;
     this._cardSelector = template;
     this._callback = callback;
-    // this._handleCardClick = handleCardClick;
   }
 
   /*добавление кода*/
@@ -51,13 +41,7 @@ export class Card {
     this._itemElement.remove();
   };
 
-  // ЗУМ; не подставляет линк и нейм, только кардселектор
   _handleImage = () => {
-    // this._handleCardClick({ name: this._name, link: this._link });
-    // const zoomPopup = new PopupWithImage(zoomer, {
-    //   nameIS: this._name,
-    //   link: this._link,
-    // });
     this._callback();
   };
 
@@ -68,16 +52,5 @@ export class Card {
     this._likeButton.addEventListener("click", this._handleLike);
 
     this._zoomPic.addEventListener("click", this._handleImage);
-    // this._zoomImage БЫЛО
-    //почему не оставить так, зачем выносить?
   }
 }
-
-// БЫЛО // /*картинка zoom*/
-// _zoomImage = () => {
-//   console.log(this._itemElement);
-//   zoomImg.src = this._link;
-//   captionImg.textContent = this._name;
-//   zoomImg.alt = this._name;
-//   openPopup(zoom);
-// };

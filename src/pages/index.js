@@ -24,6 +24,8 @@ import {
   edit,
   add,
   zoomer,
+  zoomImg,
+  captionImg,
 } from "../utils/consts.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 
@@ -53,7 +55,7 @@ const popupAddNewPlace = new PopupWithForm(add, {
   },
 });
 
-const zoomImage = new PopupWithImage(zoomer);
+const zoomImage = new PopupWithImage(zoomer, zoomImg, captionImg);
 
 function createCard(name, link) {
   const card = new Card(name, link, "#template", () =>

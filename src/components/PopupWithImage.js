@@ -1,15 +1,15 @@
 import { Popup } from "./Popup.js";
-import { zoomImg, captionImg } from "../utils/consts.js";
-
 export class PopupWithImage extends Popup {
-  constructor(cardSelector) {
+  constructor(cardSelector, zoom, caption) {
     super(cardSelector);
     this._cardSelector = cardSelector;
+    this._zoom = zoom;
+    this._caption = caption;
   }
   open({ name, link }) {
-    zoomImg.src = link;
-    zoomImg.alt = name;
-    captionImg.textContent = name;
+    this._zoom.src = link;
+    this._zoom.alt = name;
+    this._caption.textContent = name;
     super.openPopup();
   }
 }

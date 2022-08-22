@@ -50,6 +50,7 @@ export class PopupWithForm extends Popup {
       this._formElement.reset();
     }
     super.openPopup();
+    this.setEventListenersFORM();
   }
 
   closePopup() {

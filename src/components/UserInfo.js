@@ -5,7 +5,6 @@ export class UserInfo {
   }
 
   setUserInfo = (data) => {
-    console.log(data);
     this._nameSelector.textContent = data.name || "";
     this._captionSelector.textContent = data.about || "";
   };

@@ -26,8 +26,11 @@ import {
   zoomer,
   zoomImg,
   captionImg,
+  nameMaybe,
+  captionMaybe,
 } from "../utils/consts.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
+import { data } from "autoprefixer";
 
 //создания
 const cardsContainer = new Section(
@@ -38,18 +41,18 @@ const cardsContainer = new Section(
   listElements
 );
 
-const userInfo = new UserInfo({
+const userInformation = new UserInfo({
   nameSelector: nameNow,
   captionSelector: captionNow,
 });
 
-const popupProfileInfo = new PopupWithForm(edit, {
+const popupProfileInfo = new PopupWithForm(edit, config, {
   callback: (data) => {
-    userInfo.setUserInfo(data);
+    userInformation.setUserInfo(data);
   },
 });
 
-const popupAddNewPlace = new PopupWithForm(add, {
+const popupAddNewPlace = new PopupWithForm(add, config, {
   callback: (data) => {
     cardsContainer.addItem({ name: data.placename, link: data.link });
   },
@@ -76,15 +79,14 @@ cardsContainer.rendererAll();
 
 //слушатели
 popupOpenEditButton.addEventListener("click", function edit() {
-  popupProfileInfo.openPopupFORM();
+  const dataGet = userInformation.getUserInfo();
+  nameMaybe.value = dataGet.name;
+  captionMaybe.value = dataGet.about;
 
+  popupProfileInfo.openPopupFORM();
   formValidators["form-edit"].resetValidation();
-  console.log("setting listener");
-  popupProfileInfo.setEventListenersFORM();
 });
 popupOpenAddButton.addEventListener("click", function add() {
   popupAddNewPlace.openPopupFORM();
   formValidators["form-add"].resetValidation();
-  console.log("setting listener");
-  popupAddNewPlace.setEventListenersFORM();
 });

@@ -43,9 +43,9 @@
 @import url("../blocks/content/content.css");
 
 @import url("../blocks/popup/__zoomimg/popup__zoomimg.css");
-@import url("../blocks/popup/__zoom/popup__zoom.css");
 @import url("../blocks/popup/__zoomimg-box/popup__zoomimg-box.css");
 @import url("../blocks/popup/__zoomimg/popup__zoomimg-caption.css");
+@import url("../blocks/popup/_zoomed/popup_zoomed.css");
 
 @import url("../blocks/popup/popup__forms-input-error/popup__forms-input-error.css");
 @import url("../blocks/popup/popup__forms-input-error/popup__forms-input-error_active.css");

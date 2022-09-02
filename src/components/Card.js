@@ -4,6 +4,11 @@ export class Card {
     this._link = link;
     this._cardSelector = template;
     this._callback = callback;
+
+    this._itemElement = this._getTemplate();
+    this._deleteButton = this._itemElement.querySelector(".element__delete");
+    this._likeButton = this._itemElement.querySelector(".element__heart");
+    this._zoomPic = this._itemElement.querySelector(".element__image");
   }
 
   /*добавление кода*/
@@ -17,13 +22,10 @@ export class Card {
   }
 
   createItem() {
-    this._itemElement = this._getTemplate();
     this._itemElement.querySelector(".element__name").textContent = this._name;
-    this._itemElement.querySelector(".element__image").src = this._link;
-    this._itemElement.querySelector(".element__image").alt = this._name;
-    this._deleteButton = this._itemElement.querySelector(".element__delete");
-    this._likeButton = this._itemElement.querySelector(".element__heart");
-    this._zoomPic = this._itemElement.querySelector(".element__image");
+    this._zoomPic.src = this._link;
+    this._zoomPic.alt = this._name;
+
     this._setEventListeners();
     return this._itemElement;
   }
@@ -39,6 +41,7 @@ export class Card {
   // /*удаление*/
   _handleDelete = () => {
     this._itemElement.remove();
+    this._itemElement = null;
   };
 
   _handleImage = () => {

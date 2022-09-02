@@ -1,18 +1,18 @@
 export class UserInfo {
-  constructor({ nameSelector, captionSelector }) {
-    this._nameSelector = nameSelector;
-    this._captionSelector = captionSelector;
+  constructor({ nameInfo, captionInfo }) {
+    this._nameInfo = nameInfo;
+    this._captionInfo = captionInfo;
   }
 
   setUserInfo = (data) => {
-    this._nameSelector.textContent = data.name || "";
-    this._captionSelector.textContent = data.about || "";
+    this._nameInfo.textContent = data.name || "";
+    this._captionInfo.textContent = data.about || "";
   };
 
   getUserInfo = () => {
     return {
-      name: this._nameSelector.textContent,
-      about: this._captionSelector.textContent,
+      name: this._nameInfo.textContent,
+      about: this._captionInfo.textContent,
     };
   };
 }

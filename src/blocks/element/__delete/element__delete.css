@@ -1,6 +1,6 @@
 .element__delete {
-  position: relative;
-  top: -262px;
+  position: absolute;
+  top: 20px;
   left: 242px;
   min-width: 18px;
   min-height: 19px;

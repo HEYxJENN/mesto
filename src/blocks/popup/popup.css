@@ -9,6 +9,6 @@
   display: flex;
   visibility: hidden;
   opacity: 0;
-  transition: 0.5s, opacity 0.5s, linear;
   position: fixed;
+  transition: all 0.6s linear;  
 }

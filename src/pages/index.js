@@ -42,8 +42,8 @@ const cardsContainer = new Section(
 );
 
 const userInformation = new UserInfo({
-  nameSelector: nameNow,
-  captionSelector: captionNow,
+  nameInfo: nameNow,
+  captionInfo: captionNow,
 });
 
 const popupProfileInfo = new PopupWithForm(edit, config, {
@@ -51,12 +51,14 @@ const popupProfileInfo = new PopupWithForm(edit, config, {
     userInformation.setUserInfo(data);
   },
 });
+// popupProfileInfo.setEventListeners();
 
 const popupAddNewPlace = new PopupWithForm(add, config, {
   callback: (data) => {
     cardsContainer.addItem({ name: data.placename, link: data.link });
   },
 });
+// popupAddNewPlace.setEventListeners;
 
 const zoomImage = new PopupWithImage(zoomer, zoomImg, captionImg);
 
@@ -77,16 +79,21 @@ Array.from(document.forms).forEach((formElement) => {
 //вызовы
 cardsContainer.rendererAll();
 
-//слушатели
-popupOpenEditButton.addEventListener("click", function edit() {
+//функции
+function editing() {
   const dataGet = userInformation.getUserInfo();
   nameMaybe.value = dataGet.name;
   captionMaybe.value = dataGet.about;
 
-  popupProfileInfo.openPopupFORM();
+  popupProfileInfo.openPopup();
   formValidators["form-edit"].resetValidation();
-});
-popupOpenAddButton.addEventListener("click", function add() {
-  popupAddNewPlace.openPopupFORM();
+}
+
+function adding() {
+  popupAddNewPlace.openPopup();
   formValidators["form-add"].resetValidation();
-});
+}
+
+//слушатели
+popupOpenEditButton.addEventListener("click", editing);
+popupOpenAddButton.addEventListener("click", adding);

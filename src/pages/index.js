@@ -51,14 +51,12 @@ const popupProfileInfo = new PopupWithForm(edit, config, {
     userInformation.setUserInfo(data);
   },
 });
-// popupProfileInfo.setEventListeners();
 
 const popupAddNewPlace = new PopupWithForm(add, config, {
   callback: (data) => {
     cardsContainer.addItem({ name: data.placename, link: data.link });
   },
 });
-// popupAddNewPlace.setEventListeners;
 
 const zoomImage = new PopupWithImage(zoomer, zoomImg, captionImg);
 
@@ -97,3 +95,6 @@ function adding() {
 //слушатели
 popupOpenEditButton.addEventListener("click", editing);
 popupOpenAddButton.addEventListener("click", adding);
+
+popupProfileInfo.setEventListeners();
+popupAddNewPlace.setEventListeners();

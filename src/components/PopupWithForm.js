@@ -31,7 +31,7 @@ export class PopupWithForm extends Popup {
   };
 
   openPopup() {
-    this.setEventListeners();
+    // this.setEventListeners();
     super.openPopup();
   }
 

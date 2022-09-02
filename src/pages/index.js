@@ -96,3 +96,6 @@ function adding() {
 //слушатели
 popupOpenEditButton.addEventListener("click", editing);
 popupOpenAddButton.addEventListener("click", adding);
+
+popupProfileInfo.setEventListeners();
+popupAddNewPlace.setEventListeners();

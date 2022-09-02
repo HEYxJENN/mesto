@@ -7,14 +7,12 @@ export class Popup {
   openPopup() {
     this._popupElement.classList.add("popup_opened");
     document.addEventListener("keydown", this._closePopupByEsc);
-    this.setEventListeners;
+    this.setEventListeners();
   }
 
   closePopup() {
     document.removeEventListener("keydown", this._closePopupByEsc);
-    document
-      .querySelector(`${this._popupSelector}`)
-      .classList.remove("popup_opened");
+    this._popupElement.classList.remove("popup_opened");
   }
 
   _closePopupByEsc = (evt) => {
@@ -32,8 +30,8 @@ export class Popup {
     }
   };
 
-  setEventListeners = () => {
+  setEventListeners() {
     // this._popup = document.querySelector(`${this._popupSelector}`);
     this._popupElement.addEventListener("mousedown", this._closeByOverlay);
-  };
+  }
 }

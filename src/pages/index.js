@@ -82,19 +82,17 @@ function editing() {
   const dataGet = userInformation.getUserInfo();
   nameMaybe.value = dataGet.name;
   captionMaybe.value = dataGet.about;
-
+  // popupProfileInfo.setEventListeners;
   popupProfileInfo.openPopup();
   formValidators["form-edit"].resetValidation();
 }
 
 function adding() {
   popupAddNewPlace.openPopup();
+  // popupAddNewPlace.setEventListeners();
   formValidators["form-add"].resetValidation();
 }
 
 //слушатели
 popupOpenEditButton.addEventListener("click", editing);
 popupOpenAddButton.addEventListener("click", adding);
-
-popupProfileInfo.setEventListeners();
-popupAddNewPlace.setEventListeners();

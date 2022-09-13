@@ -2,10 +2,11 @@
   grid-area: avatar;
   color: white;
   margin: auto;
-  max-width: 120px;
-  max-height: 120px;
+  width:120px;
+  height: 120px;
   border-radius: 100px;
   margin-left: 0px;
+  object-fit: cover;
 }
 
 /*этот запрос меняет марджин с 0 на авто и выравнивает аватар по центру, у меня профиль сделан через грид, в ктором при десктопном разрешении надо прижимать аватар, а не выравнивать*/
@@ -13,4 +14,8 @@
   .profile__image {
     margin-left: auto;
   }
+}
+.profile__image:hover {
+  opacity: 0.5;
+  background-image:url('../../../images/VectorPen.svg');
 }

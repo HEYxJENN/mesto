@@ -6,7 +6,7 @@ export class Section {
   }
 
   addItem(item) {
-    this._containerSelector.prepend(this._renderer(item.name, item.link));
+    this._containerSelector.append(this._renderer(item.name, item.link));
   }
 
   rendererAll() {

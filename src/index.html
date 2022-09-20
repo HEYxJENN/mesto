@@ -21,7 +21,9 @@
     <main class="content">
 
       <section class="profile">
-        <img class="profile__image" src="<%=require('./images/kusto.png')%>" alt="фото Жака Ива Кусто">
+        <div class="profile__image_cover">
+          <img class="profile__image" src="<%=require('./images/kusto.png')%>" alt="фото Жака Ива Кусто">
+        </div>
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто Ибн Ахмед Хамид Третий Всея Руси</h1>
           <img class="profile__edit" src="<%=require('./images/EditButton.svg')%>" id="edit"
@@ -150,9 +152,10 @@
         </div>
         <div class="element__caption">
           <h2 class="element__name"></h2>
-          <button type="button" class="element__heart">
-          </button>
-        </div>
+          <div>
+            <button type="button" class="element__heart"></button>
+            <h4 class="element__heart-count">0</h4>
+          </div>
       </li>
     </template>
 

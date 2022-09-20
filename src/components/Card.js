@@ -1,9 +1,27 @@
+// import { likes } from "../utils/consts";
 export class Card {
-  constructor(name, link, template, callback) {
+  constructor(
+    name,
+    link,
+    datalikes,
+    cardId,
+    id,
+    ownerId,
+    template,
+    likeCounter,
+    { handlePictureClick, handleLikeImageClick, handleDeleteClick }
+  ) {
     this._name = name;
     this._link = link;
+    this._likes = datalikes;
+    this._cardId = cardId;
+    this._id = id;
+    this._ownerId = ownerId;
     this._cardSelector = template;
-    this._callback = callback;
+    this._zoomClick = handlePictureClick;
+    this._likeClick = handleLikeImageClick;
+    this._deleteClick = handleDeleteClick;
+    this._likeCounter = likeCounter;
 
     this._itemElement = this._getTemplate();
     this._deleteButton = this._itemElement.querySelector(".element__delete");
@@ -25,35 +43,59 @@ export class Card {
     this._itemElement.querySelector(".element__name").textContent = this._name;
     this._zoomPic.src = this._link;
     this._zoomPic.alt = this._name;
-
     this._setEventListeners();
+    this._deleteButton.classList.add(
+      this._id === this._ownerId
+        ? "element__delete_visible"
+        : "element__delete_hidden"
+    );
+    this.changeLikeView();
     return this._itemElement;
   }
 
   /*лайки*/
+  setLike = () => {
+    console.log("LIKED");
+    this.changeLikeView;
+    // this._likeButton.classList.toggle("element__heart_active");
+  };
 
-  _handleLike = () => {
-    console.log(this._itemElement);
-    this._likeButton.classList.toggle("element__heart_active");
-    this._likeButton.classList.toggle("element__heart");
+  isLiked() {
+    // this._likes.forEach((like) => {
+    //   if (like._id === this._id) return true;
+    //   else false;
+    // });
+    return Boolean(this._likes.find((item) => item._id === this._id));
+  }
+
+  changeLikeView = () => {
+    this._itemElement.querySelector(this._likeCounter).textContent =
+      this._likes.length;
+
+    if (this.isLiked()) {
+      this._likeButton.classList.add("element__heart_active");
+    } else {
+      this._likeButton.classList.remove("element__heart_active");
+    }
   };
 
   // /*удаление*/
-  _handleDelete = () => {
+  handleDeleteApproved() {
     this._itemElement.remove();
     this._itemElement = null;
-  };
+  }
 
-  _handleImage = () => {
-    this._callback();
+  // id
+  getCardId = () => {
+    return this._cardId;
   };
 
   //лайкудалениезумСЛУШАТЕЛИ
   _setEventListeners() {
-    this._deleteButton.addEventListener("click", this._handleDelete);
+    this._deleteButton.addEventListener("click", this._deleteClick);
 
-    this._likeButton.addEventListener("click", this._handleLike);
+    this._likeButton.addEventListener("click", this._likeClick);
 
-    this._zoomPic.addEventListener("click", this._handleImage);
+    this._zoomPic.addEventListener("click", this._zoomClick);
   }
 }

@@ -51,20 +51,18 @@ export class Api {
       }),
     }).then(this.getRes);
   }
+
+  changeLikeStatus(cardID, liked) {
+    return fetch(`${this._address}/cards/likes/${cardID}`, {
+      method: liked ? "PUT" : "DELETE",
+      headers: this._headers,
+    }).then(this.getRes);
+  }
+
+  removeCard(cardID) {
+    return fetch(`${this._address}/cards/${cardID}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this.getRes);
+  }
 }
-
-// removeCard(cardID) {
-//   return fetch(`${this._address}/${this._groupId}/cards/${cardID}`, {
-//     method: 'DELETE',
-//     headers: this._headers,
-//   })
-//     .then(this.getResponse)
-// }
-
-// changeLikeCardStatus(cardID, like) {
-//   return fetch(`${this._address}/${this._groupId}/cards/likes/${cardID}`, {
-//     method: like ? 'PUT' : 'DELETE',
-//     headers: headers: this._headers,
-//   })
-//     .then(this.getResponse)
-// }

@@ -31,6 +31,9 @@ const edit = "#popup__edit";
 const add = "#popup__add";
 const zoomer = "#zoomImg";
 const ava = "#popup__profile";
+const submit = "#popup__areusure";
+
+const likes = ".element__heart-count";
 
 export {
   buttonClosePopup,
@@ -59,4 +62,6 @@ export {
   add,
   zoomer,
   ava,
+  likes,
+  submit,
 };

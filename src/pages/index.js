@@ -15,6 +15,8 @@ import { FormValidator } from "../components/FormValidator.js";
 
 import { PopupWithForm } from "../components/PopupWithForm.js";
 
+import { PopupWithSubmit } from "../components/PopupWithSubmit.js";
+
 import { Api } from "../components/Api.js";
 
 import {
@@ -33,6 +35,8 @@ import {
   nameMaybe,
   captionMaybe,
   avatarMaybe,
+  likes,
+  submit,
 } from "../utils/consts.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { data } from "autoprefixer";
@@ -45,6 +49,8 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
+
+let userID = null;
 
 const userInformation = new UserInfo({
   nameInfo: nameNow,
@@ -64,12 +70,15 @@ const popupProfileInfo = new PopupWithForm(edit, config, {
         console.log(info), userInformation.setUserInfo(info);
         popupProfileInfo.closePopup;
       })
-      .catch((err) =>
-        console.log(`Ошибка при обновлении информации о пользователе: ${err}`)
+      .catch((error) =>
+        console.log(`Ошибка при обновлении информации о пользователе: ${error}`)
       );
     // .finally(() => userInfoPopup.renderLoading(false));
   },
 });
+
+const popupSubmit = new PopupWithSubmit(submit, config, { renderer: () => {} });
+// popupSubmit.openPopup();
 
 const cardsContainer = new Section(
   {
@@ -88,9 +97,11 @@ const popupAddNewPlace = new PopupWithForm(add, config, {
       })
       .then((info) => {
         console.log(info);
-        cardsContainer.addItem({ name: data.placename, link: data.link });
+        cardsContainer.addItem(info);
       })
-      .catch((err) => console.log(`Ошибка при добавлении карточки: ${err}`));
+      .catch((error) =>
+        console.log(`Ошибка при добавлении карточки: ${error}`)
+      );
   },
 });
 
@@ -108,17 +119,57 @@ const popupChangeAvatar = new PopupWithForm(ava, config, {
         userInformation.setUserInfo(info);
         popupProfileInfo.closePopup;
       })
-      .catch((err) => console.log(`Ошибка при обновлении аватара: ${err}`));
+      .catch((error) => console.log(`Ошибка при обновлении аватара: ${error}`));
     // .finally(() => userInfoPopup.renderLoading(false));
   },
 });
 
 const zoomImage = new PopupWithImage(zoomer, zoomImg, captionImg);
 
-function createCard(name, link) {
-  const card = new Card(name, link, "#template", () =>
-    zoomImage.open({ name, link })
+function createCard(name, link, datalikes, cardId, ownerId) {
+  const card = new Card(
+    name,
+    link,
+    datalikes,
+    cardId,
+    ownerId,
+    userID,
+    "#template",
+    likes,
+    {
+      handlePictureClick: () => {
+        zoomImage.open({ name, link });
+      },
+
+      handleLikeImageClick: () => {
+        console.log(card.isLiked()),
+          api
+            .changeLikeStatus(card.getCardId(), !card.isLiked())
+            .then(card.setLike)
+            .catch((error) =>
+              console.log(`Ошибка постановки лайка:   ${error}`)
+            );
+      },
+
+      handleDeleteClick: () => {
+        console.log(card.getCardId());
+        popupSubmit.setSubmit(() => {
+          api
+            .removeCard(card.getCardId())
+            .then(() => {
+              card.handleDeleteApproved();
+            })
+            .catch((error) =>
+              console.log(`Ошибка удаления карточки:   ${error}`)
+            );
+          // .finally ()
+        });
+
+        popupSubmit.openPopup();
+      },
+    }
   );
+
   const cardElement = card.createItem();
   return cardElement;
 }
@@ -161,11 +212,12 @@ popupAddNewPlace.setEventListeners();
 //промис
 Promise.all([api.getInitialCards(), api.getUser()])
   .then(([itemsApi, userData]) => {
-    // userId = userData._id;
     console.log(userData.name);
     console.log(userData.about);
     console.log(userData.avatar);
     console.log(itemsApi);
+    console.log(userData._id);
+    userID = userData._id;
 
     userInformation.setUserInfo({
       name: userData.name,
@@ -173,14 +225,18 @@ Promise.all([api.getInitialCards(), api.getUser()])
       avatar: userData.avatar,
     });
 
-    const cardsContainer = new Section(
-      {
-        items: itemsApi,
-        renderer: createCard,
-      },
-      listElements
-    );
-    cardsContainer.rendererAll();
+    // const cardsContainer = new Section(
+    //   {
+    //     items: itemsApi,
+    //     renderer: createCard,
+    //   },
+    //   listElements
+    // );
+
+    cardsContainer.rendererAll(itemsApi);
+    // .reverse());
+
+    console.log(userID);
   })
 
-  .catch((err) => console.log(`Ошибка загрузки данных: ${err}`));
+  .catch((error) => console.log(`Ошибка загрузки данных: ${error}`));

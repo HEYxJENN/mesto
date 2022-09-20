@@ -6,11 +6,13 @@ export class Section {
   }
 
   addItem(item) {
-    this._containerSelector.append(this._renderer(item.name, item.link));
+    this._containerSelector.append(
+      this._renderer(item.name, item.link, item.likes, item._id, item.owner._id)
+    );
   }
 
-  rendererAll() {
-    this._items.forEach((item) => {
+  rendererAll(items) {
+    items.forEach((item) => {
       this.addItem(item);
     });
   }

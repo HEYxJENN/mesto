@@ -5,8 +5,8 @@ export class Card {
     link,
     datalikes,
     cardId,
-    id,
     ownerId,
+    id,
     template,
     likeCounter,
     { handlePictureClick, handleLikeImageClick, handleDeleteClick }
@@ -54,17 +54,16 @@ export class Card {
   }
 
   /*лайки*/
-  setLike = () => {
+  setLike = (data) => {
     console.log("LIKED");
     this.changeLikeView;
-    // this._likeButton.classList.toggle("element__heart_active");
+    this._likeButton.classList.toggle("element__heart_active");
+
+    this._itemElement.querySelector(this._likeCounter).textContent =
+      data.likes.length;
   };
 
   isLiked() {
-    // this._likes.forEach((like) => {
-    //   if (like._id === this._id) return true;
-    //   else false;
-    // });
     return Boolean(this._likes.find((item) => item._id === this._id));
   }
 

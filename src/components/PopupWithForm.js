@@ -7,6 +7,8 @@ export class PopupWithForm extends Popup {
     this._InputList = Array.from(
       this._formElement.querySelectorAll(configuration.inputSelector)
     );
+    this._saveButton = this._formElement.querySelector(".popup__save");
+    this._saveButtonOrig = this._saveButton;
   }
   _getInputValues = () => {
     const values = {};
@@ -31,4 +33,10 @@ export class PopupWithForm extends Popup {
     this._formElement.reset();
     super.closePopup();
   };
+
+  loading(processing) {
+    this._saveButton.textContent = processing
+      ? "Загрузка..."
+      : this._saveButtonOrig;
+  }
 }

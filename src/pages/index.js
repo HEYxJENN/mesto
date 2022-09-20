@@ -61,6 +61,7 @@ const userInformation = new UserInfo({
 const popupProfileInfo = new PopupWithForm(edit, config, {
   callback: (data) => {
     userInformation.setUserInfo(data);
+    popupProfileInfo.loading(true);
     api
       .setUser({
         name: data.name,
@@ -72,8 +73,8 @@ const popupProfileInfo = new PopupWithForm(edit, config, {
       })
       .catch((error) =>
         console.log(`Ошибка при обновлении информации о пользователе: ${error}`)
-      );
-    // .finally(() => userInfoPopup.renderLoading(false));
+      )
+      .finally(() => popupProfileInfo.renderLoading(false));
   },
 });
 
@@ -90,6 +91,7 @@ const cardsContainer = new Section(
 
 const popupAddNewPlace = new PopupWithForm(add, config, {
   callback: (data) => {
+    popupAddNewPlace.loading(true);
     api
       .addCard({
         name: data.placename,
@@ -100,7 +102,9 @@ const popupAddNewPlace = new PopupWithForm(add, config, {
         cardsContainer.addItem(info);
       })
       .catch((error) =>
-        console.log(`Ошибка при добавлении карточки: ${error}`)
+        console
+          .log(`Ошибка при добавлении карточки: ${error}`)
+          .finally(popupAddNewPlace.loading(false))
       );
   },
 });
@@ -108,9 +112,9 @@ const popupAddNewPlace = new PopupWithForm(add, config, {
 const popupChangeAvatar = new PopupWithForm(ava, config, {
   callback: (data) => {
     // userInformation.setUserInfo(data);
-    console.log(data);
-    console.log(data.link);
-
+    // console.log(data);
+    // console.log(data.link);
+    popupChangeAvatar.loading(true);
     api
       .setUserAvatar({
         avatar: data.link,
@@ -119,8 +123,8 @@ const popupChangeAvatar = new PopupWithForm(ava, config, {
         userInformation.setUserInfo(info);
         popupProfileInfo.closePopup;
       })
-      .catch((error) => console.log(`Ошибка при обновлении аватара: ${error}`));
-    // .finally(() => userInfoPopup.renderLoading(false));
+      .catch((error) => console.log(`Ошибка при обновлении аватара: ${error}`))
+      .finally(() => popupChangeAvatar.loading(false));
   },
 });
 
@@ -145,7 +149,7 @@ function createCard(name, link, datalikes, cardId, ownerId) {
         console.log(card.isLiked()),
           api
             .changeLikeStatus(card.getCardId(), !card.isLiked())
-            .then(card.setLike)
+            .then((datalikes) => card.setLike(datalikes))
             .catch((error) =>
               console.log(`Ошибка постановки лайка:   ${error}`)
             );

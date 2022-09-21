@@ -111,17 +111,14 @@ const popupAddNewPlace = new PopupWithForm(add, config, {
 
 const popupChangeAvatar = new PopupWithForm(ava, config, {
   callback: (data) => {
-    // userInformation.setUserInfo(data);
-    // console.log(data);
-    // console.log(data.link);
     popupChangeAvatar.loading(true);
     api
       .setUserAvatar({
-        avatar: data.link,
+        avatar: data.linkAv,
       })
       .then((info) => {
         userInformation.setUserInfo(info);
-        popupProfileInfo.closePopup;
+        // popupChangeAvatar.closePopup;
       })
       .catch((error) => console.log(`Ошибка при обновлении аватара: ${error}`))
       .finally(() => popupChangeAvatar.loading(false));

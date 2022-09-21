@@ -216,11 +216,6 @@ popupAddNewPlace.setEventListeners();
 //промис
 Promise.all([api.getInitialCards(), api.getUser()])
   .then(([itemsApi, userData]) => {
-    console.log(userData.name);
-    console.log(userData.about);
-    console.log(userData.avatar);
-    console.log(itemsApi);
-    console.log(userData._id);
     userID = userData._id;
 
     userInformation.setUserInfo({
@@ -228,14 +223,6 @@ Promise.all([api.getInitialCards(), api.getUser()])
       about: userData.about,
       avatar: userData.avatar,
     });
-
-    // const cardsContainer = new Section(
-    //   {
-    //     items: itemsApi,
-    //     renderer: createCard,
-    //   },
-    //   listElements
-    // );
 
     cardsContainer.rendererAll(itemsApi);
     // .reverse());

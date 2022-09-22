@@ -6,12 +6,12 @@ export class Section {
   }
 
   addItem(item) {
-    this._containerSelector.append(
+    this._containerSelector.prepend(
       this._renderer(item.name, item.link, item.likes, item._id, item.owner._id)
     );
   }
 
-  rendererAll(items) {
+  renderItems(items) {
     items.forEach((item) => {
       this.addItem(item);
     });

@@ -21,7 +21,7 @@ export class PopupWithForm extends Popup {
   _handleSubmit = (evt) => {
     evt.preventDefault();
     this._submitHandler(this._getInputValues());
-    this.closePopup();
+    this.close();
   };
 
   setEventListeners() {
@@ -29,9 +29,9 @@ export class PopupWithForm extends Popup {
     super.setEventListeners();
   }
 
-  closePopup = () => {
+  close = () => {
     this._formElement.reset();
-    super.closePopup();
+    super.close();
   };
 
   loading(processing) {

@@ -3,8 +3,6 @@ import "./index.css";
 
 import { config } from "../utils/config.js";
 
-// import { items } from "../utils/items.js";
-
 import { Card } from "../components/Card.js";
 
 import { Section } from "../components/Section.js";
@@ -39,7 +37,6 @@ import {
   submit,
 } from "../utils/consts.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
-import { data } from "autoprefixer";
 
 //создания экземпляров классов
 const api = new Api({
@@ -69,7 +66,7 @@ const popupProfileInfo = new PopupWithForm(edit, config, {
       })
       .then((info) => {
         console.log(info), userInformation.setUserInfo(info);
-        popupProfileInfo.closePopup;
+        popupProfileInfo.close;
       })
       .catch((error) =>
         console.log(`Ошибка при обновлении информации о пользователе: ${error}`)
@@ -79,11 +76,10 @@ const popupProfileInfo = new PopupWithForm(edit, config, {
 });
 
 const popupSubmit = new PopupWithSubmit(submit, config, { renderer: () => {} });
-// popupSubmit.openPopup();
 
 const cardsContainer = new Section(
   {
-    items: data,
+    items: {},
     renderer: createCard,
   },
   listElements
@@ -118,7 +114,6 @@ const popupChangeAvatar = new PopupWithForm(ava, config, {
       })
       .then((info) => {
         userInformation.setUserInfo(info);
-        // popupChangeAvatar.closePopup;
       })
       .catch((error) => console.log(`Ошибка при обновлении аватара: ${error}`))
       .finally(() => popupChangeAvatar.loading(false));
@@ -166,7 +161,7 @@ function createCard(name, link, datalikes, cardId, ownerId) {
           // .finally ()
         });
 
-        popupSubmit.openPopup();
+        popupSubmit.open();
       },
     }
   );
@@ -184,28 +179,28 @@ Array.from(document.forms).forEach((formElement) => {
 });
 
 //функции
-function editing() {
+function openEditProfileForm() {
   const dataGet = userInformation.getUserInfo();
   nameMaybe.value = dataGet.name;
   captionMaybe.value = dataGet.about;
-  popupProfileInfo.openPopup();
   formValidators["form-edit"].resetValidation();
+  popupProfileInfo.open();
 }
 
-function adding() {
-  popupAddNewPlace.openPopup();
+function openAddCardForm() {
+  popupAddNewPlace.open();
   formValidators["form-add"].resetValidation();
 }
 
-function changingAvatar() {
-  popupChangeAvatar.openPopup();
+function openUpdateAvatarForm() {
+  popupChangeAvatar.open();
   formValidators["form-avatar"].resetValidation();
 }
 
 //слушатели
-popupOpenEditButton.addEventListener("click", editing);
-popupOpenAddButton.addEventListener("click", adding);
-avatarNow.addEventListener("click", changingAvatar);
+popupOpenEditButton.addEventListener("click", openEditProfileForm);
+popupOpenAddButton.addEventListener("click", openAddCardForm);
+avatarNow.addEventListener("click", openUpdateAvatarForm);
 
 popupProfileInfo.setEventListeners();
 popupAddNewPlace.setEventListeners();
@@ -221,8 +216,7 @@ Promise.all([api.getInitialCards(), api.getUser()])
       avatar: userData.avatar,
     });
 
-    cardsContainer.rendererAll(itemsApi);
-    // .reverse());
+    cardsContainer.renderItems(itemsApi.reverse());
 
     console.log(userID);
   })

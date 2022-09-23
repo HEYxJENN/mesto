@@ -17,7 +17,7 @@ export class Popup {
 
   _closePopupByEsc = (evt) => {
     if (evt.key === "Escape") {
-      this.closePopup();
+      this.close();
     }
   };
 
@@ -31,7 +31,6 @@ export class Popup {
   };
 
   setEventListeners() {
-    // this._popup = document.querySelector(`${this._popupSelector}`);
     this._popupElement.addEventListener("mousedown", this._closeByOverlay);
   }
 }
